@@ -4,6 +4,7 @@ import logging
 import rospy
 import random
 import numpy as np
+import pickle
 import matplotlib.pyplot as plt
 import grid_activations
 from hbp_nrp_virtual_coach.virtual_coach import VirtualCoach
@@ -16,7 +17,7 @@ class Model:
     def __init__(self, episodes, steps):
         self.episodes = episodes
         self.steps = steps
-        self.actions = [2, 1, 3, 1, 2, 1, 3, 1]
+        self.actions = [1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2]
 
     def run_episode(self, i):
         t = 0
@@ -35,10 +36,10 @@ class Model:
             rospy.set_param('action_done', action_done)
             while action_done == 0:
                 action_done = rospy.get_param('action_done')
-            position = np.array(rospy.get_param('position'))
-            orientation = np.array(rospy.get_param('orientation'))
-            print('position:', position)
-            print('orientation:', orientation)
+            # position = np.array(rospy.get_param('position'))
+            # orientation = np.array(rospy.get_param('orientation'))
+            # print('position:', position)
+            # print('orientation:', orientation)
 
             t += 1
             time.sleep(.5)
@@ -66,8 +67,8 @@ class Model:
 
 def main():
     # set parameters
-    episodes = 2
-    steps = 8
+    episodes = 1
+    steps = 28
 
     vc = VirtualCoach(environment='local', storage_username='nrpuser',
                       storage_password='password')

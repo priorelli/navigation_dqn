@@ -83,7 +83,7 @@ class Model:
 def main():
     # set parameters
     episodes = 2000
-    steps = 20
+    steps = 50
 
     vc = VirtualCoach(environment='local', storage_username='nrpuser',
                       storage_password='password')

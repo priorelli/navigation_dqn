@@ -5,25 +5,26 @@ import rospy
 import random
 import numpy as np
 import matplotlib.pyplot as plt
-import grid_activations
+import seaborn as sns
+from grid_activations import generate_grids
 from hbp_nrp_virtual_coach.virtual_coach import VirtualCoach
 
 
-env = '/home/spock/.opt/nrpStorage/template_husky_0/empty_world.sdf'
+env = '/home/spock/.opt/nrpStorage/template_husky_0_0/empty_world.sdf'
 
 
 class Model:
     def __init__(self, episodes, steps):
         self.episodes = episodes
         self.steps = steps
-        # self.actions = [1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2,
-        #                 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2]
+        # self.actions = [1, 1, 1, 1]
 
     def run_episode(self, i, pos, dir, grid):
         t = 0
         done = 0
 
         while not done and t < self.steps:
+            # choose random action
             # action = self.actions[t]
             action = random.randint(1, 3)
             rospy.set_param('action', action)
@@ -34,6 +35,8 @@ class Model:
             # execute action
             action_done = 0
             rospy.set_param('action_done', action_done)
+
+            # wait until action is done
             while action_done == 0:
                 action_done = rospy.get_param('action_done')
             pos = np.array(rospy.get_param('position'))
@@ -41,8 +44,20 @@ class Model:
             red = np.array(rospy.get_param('red'))
             print('position:', pos[0], pos[1])
             print('head direction:', dir)
-            print('grid cell:', grid[int(pos[0]) - 1, int(pos[1]) - 1])
-            print()
+            print('grid cell:', grid[int(pos[0]), int(pos[1])], '\n')
+
+            # update robot position
+            ax = plt.subplot(1, 1, 1)
+            ax.grid()
+            ax.plot(pos[1], pos[0], marker='v', markersize=3, color='red')
+            ax.set_xlim([0, 16])
+            ax.set_ylim([0, 16])
+            ax.invert_yaxis()
+            ticks = np.arange(0, 16, 1)
+            ax.set_xticks(ticks)
+            ax.set_yticks(ticks)
+            plt.hold(True)
+            plt.savefig('robot.png')
 
             # get reward
             reward_pos = np.array([[1.5, 1.5], [14.5, 14.5], [1.5, 14.5], [14.5, 1.5]])
@@ -59,35 +74,56 @@ class Model:
     def run_training(self, vc):
         # launch experiment
         try:
-            self.sim = vc.launch_experiment('template_husky_0')
+            self.sim = vc.launch_experiment('template_husky_0_0')
         except:
             time.sleep(1)
         time.sleep(10)
 
         for i in range(self.episodes):
+            # set initial parameters
             init_position = np.array([7.5, 7.5])
             init_direction = 0.
-            init_grid = grid_activations.generate_grids(14)
-            # init_state = np.concatenate([init_grid.flatten(), [init_orientation]])
+            grid_area = generate_grids(16)
+
+            # plot robot position
+            ax = plt.subplot(1, 1, 1)
+            ax.plot(init_position[1], init_position[0], marker='v', markersize=3, color='red')
+            ax.set_xlim([0, 16])
+            ax.set_ylim([0, 16])
+            ax.invert_yaxis()
+            ticks = np.arange(0, 16, 1)
+            ax.set_xticks(ticks)
+            ax.set_yticks(ticks)
+            ax.grid()
+            plt.hold(True)
+            plt.savefig('robot.png')
+
+            # plot grid cells
+            # sns.plt.figure('grid')
+            # ax = sns.heatmap(grid_area, xticklabels=False, yticklabels=False, cbar=False)
+            # sns.plt.savefig('grid.png')
 
             # start the experiment
             self.sim.start()
 
             # start episode
-            self.run_episode(i, init_position, init_direction, init_grid)
+            self.run_episode(i, init_position, init_direction, grid_area)
 
-            self.sim.reset('robot_pose')
+            # reset simulation
+            self.sim.reset('full')
             time.sleep(1)
 
 
 def main():
     # set parameters
     episodes = 2000
-    steps = 50
+    steps = 12
 
+    # start virtual coach
     vc = VirtualCoach(environment='local', storage_username='nrpuser',
                       storage_password='password')
 
+    # run training
     model = Model(episodes=episodes, steps=steps)
     model.run_training(vc)
 

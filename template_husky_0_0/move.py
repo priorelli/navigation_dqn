@@ -27,9 +27,9 @@ def move(t, step_index, position, camera, initial_pose):
     else:
         rospy.set_param('red', False)
 
-    ang = 1.
+    ang = 2.
     lin = 1.
-    epsilon = .01
+    epsilon = .017
 
     def move_forward():
         if step_index.value == 0:
@@ -109,9 +109,6 @@ def move(t, step_index, position, camera, initial_pose):
         move_left()
     elif action == 3:
         move_right()
-
-    with open('/home/spock/Documents/positions.txt', 'a') as file:
-        file.write(str(current_pose.position.x) + '\t' + str(current_pose.position.y) + '\n')
 
     if step_index.value == 2:
         orientation = [current_pose.orientation.x, current_pose.orientation.y,

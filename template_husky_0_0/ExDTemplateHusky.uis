@@ -121,7 +121,6 @@
           "isClosable": true,
           "reorderEnabled": true,
           "title": "",
-          "height": 57.142857142857146,
           "content": [
             {
               "type": "stack",
@@ -129,7 +128,7 @@
               "reorderEnabled": true,
               "title": "",
               "activeItemIndex": 0,
-              "width": 60.86956521739131,
+              "width": 57.14285714285714,
               "content": [
                 {
                   "type": "component",
@@ -150,61 +149,26 @@
               ]
             },
             {
-              "type": "column",
+              "type": "stack",
               "isClosable": true,
               "reorderEnabled": true,
               "title": "",
-              "width": 39.1304347826087,
+              "activeItemIndex": 0,
+              "width": 42.857142857142854,
               "content": [
                 {
-                  "type": "stack",
+                  "type": "component",
+                  "title": "Video Stream",
+                  "id": "video-stream",
+                  "componentName": "angularModuleComponent",
+                  "componentState": {
+                    "module": "exdFrontendApp",
+                    "angularDirective": "<video-stream />"
+                  },
+                  "pwidth": 600,
+                  "pheight": 400,
                   "isClosable": true,
-                  "reorderEnabled": true,
-                  "title": "",
-                  "activeItemIndex": 0,
-                  "width": 40.00532339632686,
-                  "height": 57.14285714285714,
-                  "content": [
-                    {
-                      "type": "component",
-                      "title": "Video Stream",
-                      "id": "video-stream",
-                      "componentName": "angularModuleComponent",
-                      "componentState": {
-                        "module": "exdFrontendApp",
-                        "angularDirective": "<video-stream />"
-                      },
-                      "pwidth": 600,
-                      "pheight": 400,
-                      "isClosable": true,
-                      "reorderEnabled": true
-                    }
-                  ]
-                },
-                {
-                  "type": "stack",
-                  "isClosable": true,
-                  "reorderEnabled": true,
-                  "title": "",
-                  "activeItemIndex": 0,
-                  "height": 42.857142857142854,
-                  "content": [
-                    {
-                      "type": "component",
-                      "title": "Log Console",
-                      "id": "log-console",
-                      "componentName": "angularModuleComponent",
-                      "componentState": {
-                        "module": "exdFrontendApp",
-                        "angularDirective": "<log-console />",
-                        "singleton": true
-                      },
-                      "pwidth": 400,
-                      "pheight": 300,
-                      "isClosable": true,
-                      "reorderEnabled": true
-                    }
-                  ]
+                  "reorderEnabled": true
                 }
               ]
             }

@@ -15,9 +15,10 @@ env = '/home/spock/.opt/nrpStorage/template_husky_0_0/empty_world.sdf'
 
 class Model:
     def __init__(self, episodes, steps):
+        self.sim = None
+        self.grid_area = None
         self.episodes = episodes
         self.steps = steps
-        # self.actions = [1, 1, 1, 1]
 
     def run_episode(self, i, pos, dir, grid):
         t = 0
@@ -25,7 +26,6 @@ class Model:
 
         while not done and t < self.steps:
             # choose random action
-            # action = self.actions[t]
             action = random.randint(1, 3)
             rospy.set_param('action', action)
             print('action:', 'move forward' if action == 1 else
@@ -47,8 +47,7 @@ class Model:
             print('grid cell:', grid[int(pos[0]), int(pos[1])], '\n')
 
             # update robot position
-            ax = plt.subplot(1, 1, 1)
-            ax.grid()
+            ax = plt.subplot(2, 1, 1)
             ax.plot(pos[1], pos[0], marker='v', markersize=3, color='red')
             ax.set_xlim([0, 16])
             ax.set_ylim([0, 16])
@@ -56,8 +55,15 @@ class Model:
             ticks = np.arange(0, 16, 1)
             ax.set_xticks(ticks)
             ax.set_yticks(ticks)
+            ax.grid()
+
+            # plot grid cells
+            ax2 = plt.subplot(2, 1, 2)
+            ax2.imshow(self.grid_area, cmap='gray', interpolation='nearest')
+
+            # save plot
             plt.hold(True)
-            plt.savefig('robot.png')
+            plt.savefig('plot.png')
 
             # get reward
             reward_pos = np.array([[1.5, 1.5], [14.5, 14.5], [1.5, 14.5], [14.5, 1.5]])
@@ -83,31 +89,32 @@ class Model:
             # set initial parameters
             init_position = np.array([7.5, 7.5])
             init_direction = 0.
-            grid_area = generate_grids(16)
+            self.grid_area = generate_grids(16)
 
             # plot robot position
-            ax = plt.subplot(1, 1, 1)
-            ax.plot(init_position[1], init_position[0], marker='v', markersize=3, color='red')
-            ax.set_xlim([0, 16])
-            ax.set_ylim([0, 16])
-            ax.invert_yaxis()
+            ax1 = plt.subplot(2, 1, 1)
+            ax1.plot(init_position[1], init_position[0], marker='v', markersize=3, color='red')
+            ax1.set_xlim([0, 16])
+            ax1.set_ylim([0, 16])
+            ax1.invert_yaxis()
             ticks = np.arange(0, 16, 1)
-            ax.set_xticks(ticks)
-            ax.set_yticks(ticks)
-            ax.grid()
-            plt.hold(True)
-            plt.savefig('robot.png')
+            ax1.set_xticks(ticks)
+            ax1.set_yticks(ticks)
+            ax1.grid()
 
             # plot grid cells
-            # sns.plt.figure('grid')
-            # ax = sns.heatmap(grid_area, xticklabels=False, yticklabels=False, cbar=False)
-            # sns.plt.savefig('grid.png')
+            ax2 = plt.subplot(2, 1, 2)
+            ax2.imshow(self.grid_area, cmap='gray', interpolation='nearest')
+
+            # save plot
+            plt.hold(True)
+            plt.savefig('plot.png')
 
             # start the experiment
             self.sim.start()
 
             # start episode
-            self.run_episode(i, init_position, init_direction, grid_area)
+            self.run_episode(i, init_position, init_direction, self.grid_area)
 
             # reset simulation
             self.sim.reset('full')

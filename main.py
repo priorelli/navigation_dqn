@@ -15,8 +15,6 @@ env = '/home/spock/.opt/nrpStorage/template_husky_0_0/empty_world.sdf'
 
 class Model:
     def __init__(self, episodes, steps):
-        self.sim = None
-        self.grid_area = None
         self.episodes = episodes
         self.steps = steps
 
@@ -47,22 +45,23 @@ class Model:
             print('grid cell:', grid[int(pos[0]), int(pos[1])], '\n')
 
             # update robot position
-            ax = plt.subplot(2, 1, 1)
-            ax.plot(pos[1], pos[0], marker='v', markersize=3, color='red')
-            ax.set_xlim([0, 16])
-            ax.set_ylim([0, 16])
-            ax.invert_yaxis()
+            self.ax1.plot(pos[1], pos[0], marker='v', markersize=3, color='red')
+            self.ax1.set_xlim([0, 16])
+            self.ax1.set_ylim([0, 16])
+            self.ax1.invert_yaxis()
             ticks = np.arange(0, 16, 1)
-            ax.set_xticks(ticks)
-            ax.set_yticks(ticks)
-            ax.grid()
+            self.ax1.set_xticks(ticks)
+            self.ax1.set_yticks(ticks)
+            self.ax1.grid(True)
 
             # plot grid cells
-            ax2 = plt.subplot(2, 1, 2)
-            ax2.imshow(self.grid_area, cmap='gray', interpolation='nearest')
+            self.ax2.imshow(self.grid_area, cmap='gray', interpolation='nearest')
+            self.ax2.invert_yaxis()
+            self.ax2.set_xticks([])
+            self.ax2.set_yticks([])
+            self.ax2.grid(False)
 
             # save plot
-            plt.hold(True)
             plt.savefig('plot.png')
 
             # get reward
@@ -91,23 +90,29 @@ class Model:
             init_direction = 0.
             self.grid_area = generate_grids(16)
 
+            # create figure
+            self.f = plt.figure(figsize=(5, 10))
+            self.ax1 = self.f.add_subplot(211)
+            self.ax2 = self.f.add_subplot(212)
+
             # plot robot position
-            ax1 = plt.subplot(2, 1, 1)
-            ax1.plot(init_position[1], init_position[0], marker='v', markersize=3, color='red')
-            ax1.set_xlim([0, 16])
-            ax1.set_ylim([0, 16])
-            ax1.invert_yaxis()
+            self.ax1.plot(init_position[1], init_position[0], marker='v', markersize=3, color='red')
+            self.ax1.set_xlim([0, 16])
+            self.ax1.set_ylim([0, 16])
+            self.ax1.invert_yaxis()
             ticks = np.arange(0, 16, 1)
-            ax1.set_xticks(ticks)
-            ax1.set_yticks(ticks)
-            ax1.grid()
+            self.ax1.set_xticks(ticks)
+            self.ax1.set_yticks(ticks)
+            self.ax1.grid(True)
 
             # plot grid cells
-            ax2 = plt.subplot(2, 1, 2)
-            ax2.imshow(self.grid_area, cmap='gray', interpolation='nearest')
+            self.ax2.imshow(self.grid_area, cmap='gray', interpolation='nearest')
+            self.ax2.invert_yaxis()
+            self.ax2.set_xticks([])
+            self.ax2.set_yticks([])
+            self.ax2.grid(False)
 
             # save plot
-            plt.hold(True)
             plt.savefig('plot.png')
 
             # start the experiment

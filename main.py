@@ -4,6 +4,7 @@ import logging
 import rospy
 import random
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 import seaborn as sns
 from grid_activations import generate_grids
@@ -18,7 +19,7 @@ class Model:
         self.episodes = episodes
         self.steps = steps
 
-    def run_episode(self, i, pos, dir, grid):
+    def run_episode(self, i):
         t = 0
         done = 0
 
@@ -38,31 +39,14 @@ class Model:
             while action_done == 0:
                 action_done = rospy.get_param('action_done')
             pos = np.array(rospy.get_param('position'))
-            dir = np.array(rospy.get_param('direction'))
-            red = np.array(rospy.get_param('red'))
+            dir = rospy.get_param('direction')
+            red = rospy.get_param('red')
             print('position:', pos[0], pos[1])
-            print('head direction:', dir)
-            print('grid cell:', grid[int(pos[0]), int(pos[1])], '\n')
+            print('direction:', dir)
+            print('grid cell:', self.grid_area[int(pos[0]), int(pos[1])], '\n')
 
-            # update robot position
-            self.ax1.plot(pos[1], pos[0], marker='v', markersize=3, color='red')
-            self.ax1.set_xlim([0, 16])
-            self.ax1.set_ylim([0, 16])
-            self.ax1.invert_yaxis()
-            ticks = np.arange(0, 16, 1)
-            self.ax1.set_xticks(ticks)
-            self.ax1.set_yticks(ticks)
-            self.ax1.grid(True)
-
-            # plot grid cells
-            self.ax2.imshow(self.grid_area, cmap='gray', interpolation='nearest')
-            self.ax2.invert_yaxis()
-            self.ax2.set_xticks([])
-            self.ax2.set_yticks([])
-            self.ax2.grid(False)
-
-            # save plot
-            plt.savefig('plot.png')
+            # update plot
+            self.draw_plot(pos, dir)
 
             # get reward
             reward_pos = np.array([[1.5, 1.5], [14.5, 14.5], [1.5, 14.5], [14.5, 1.5]])
@@ -85,51 +69,56 @@ class Model:
         time.sleep(10)
 
         for i in range(self.episodes):
-            # set initial parameters
-            init_position = np.array([7.5, 7.5])
-            init_direction = 0.
-            self.grid_area = generate_grids(16)
-
             # create figure
             self.f = plt.figure(figsize=(5, 10))
             self.ax1 = self.f.add_subplot(211)
             self.ax2 = self.f.add_subplot(212)
 
-            # plot robot position
-            self.ax1.plot(init_position[1], init_position[0], marker='v', markersize=3, color='red')
-            self.ax1.set_xlim([0, 16])
-            self.ax1.set_ylim([0, 16])
-            self.ax1.invert_yaxis()
-            ticks = np.arange(0, 16, 1)
-            self.ax1.set_xticks(ticks)
-            self.ax1.set_yticks(ticks)
-            self.ax1.grid(True)
+            # set initial parameters
+            init_position = np.array([7.5, 7.5])
+            init_direction = 0
+            self.grid_area = generate_grids(16)
 
-            # plot grid cells
-            self.ax2.imshow(self.grid_area, cmap='gray', interpolation='nearest')
-            self.ax2.invert_yaxis()
-            self.ax2.set_xticks([])
-            self.ax2.set_yticks([])
-            self.ax2.grid(False)
-
-            # save plot
-            plt.savefig('plot.png')
+            # draw plot
+            self.draw_plot(init_position, init_direction)
 
             # start the experiment
             self.sim.start()
 
             # start episode
-            self.run_episode(i, init_position, init_direction, self.grid_area)
+            self.run_episode(i)
 
             # reset simulation
             self.sim.reset('full')
             time.sleep(1)
 
+    def draw_plot(self, pos, dir):
+        # plot robot position
+        markers = ['v', '>', '^', '<']
+        self.ax1.plot(pos[1], pos[0], marker=markers[dir], markersize=3, color='red')
+        self.ax1.set_xlim([0, 16])
+        self.ax1.set_ylim([0, 16])
+        self.ax1.invert_yaxis()
+        ticks = np.arange(0, 16, 1)
+        self.ax1.set_xticks(ticks)
+        self.ax1.set_yticks(ticks)
+        self.ax1.grid(True)
+
+        # plot grid cells
+        self.ax2.imshow(self.grid_area, cmap='gray', interpolation='nearest')
+        self.ax2.invert_yaxis()
+        self.ax2.set_xticks([])
+        self.ax2.set_yticks([])
+        self.ax2.grid(False)
+
+        # save plot
+        plt.savefig('plot.png')
+
 
 def main():
     # set parameters
     episodes = 2000
-    steps = 12
+    steps = 50
 
     # start virtual coach
     vc = VirtualCoach(environment='local', storage_username='nrpuser',

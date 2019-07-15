@@ -24,10 +24,17 @@ class Model:
 
         self.qlearning = Qlearning(gamma=self.gamma, alpha=self.alpha,
                                    n_env=self.n_env, n_actions=self.n_actions)
+        self.reward_visits = np.zeros((self.n_env, self.n_env), dtype=np.int32)
+        self.scores = [0]
+
+        # first is top left and then clockwise direction
+        self.reward_pos = np.array([[1.5, 1.5], [1.5, 14.5], [14.5, 1.5], [14.5, 14.5]])
 
     def run_episode(self, i, state):
         step = 0
         done = 0
+
+        dist = sum(abs(self.reward_pos[0] - state))
 
         while not done and step < self.steps:
             # choose action using policy
@@ -56,16 +63,13 @@ class Model:
             self.draw_plot(i, state_new, dir)
 
             # get reward
-            # first is top left and then clockwise direction
-            reward_pos = np.array([[1.5, 1.5], [1.5, 14.5], [14.5, 1.5], [14.5, 14.5]])
             reward = 0
             if red:
-                for r_idx, j in enumerate(reward_pos):
-                    if np.linalg.norm(state_new - j) < 2 in reward_pos:
+                for r_idx, j in enumerate(self.reward_pos):
+                    if np.linalg.norm(state_new - j) < 2 in self.reward_pos:
                         reward = 5
                         done = 1
-                        self.reward_counters[int(j[0]), int(j[1])] += 1
-                        print('Done!')
+                        self.reward_visits[int(j[0]), int(j[1])] += 1
                         print('Reward index:', r_idx)
                         break
             elif np.linalg.norm(state - state_new) < .1:
@@ -80,6 +84,8 @@ class Model:
             td = self.qlearning.update_table(state, state_new, action, reward)
             print('TD-error:', td)
 
+        score = dist / step if done else 0
+        self.scores.append(self.scores[-1] * .9 + score * .1)
         print('Path length:', step)
 
     def run_training(self, vc):
@@ -94,7 +100,6 @@ class Model:
             init_position = np.array([7.5, 7.5])
             init_direction = 0
             self.grid_area = generate_grids(16)
-            self.reward_counters = np.zeros((self.n_env, self.n_env), dtype=np.int32)
 
             # draw plot
             rospy.set_param('i', i)
@@ -116,6 +121,12 @@ class Model:
             # stop experiment
             self.sim.stop()
             time.sleep(10)
+
+            # draw reward visits
+            self.draw_visits()
+
+            # draw scores
+            self.draw_scores()
 
     def draw_plot(self, i, pos, dir):
         # plot robot position
@@ -139,11 +150,34 @@ class Model:
         # save plot
         plt.savefig('plot_%d.png' % i)
 
+    def draw_visits(self):
+        plt.figure()
+        plt.gca().invert_yaxis()
+        ticks = np.arange(0, 16, 1)
+        plt.xticks(ticks)
+        plt.yticks(ticks)
+        for i in range(self.n_env):
+            for j in range(self.n_env):
+                plt.text(j + .5, i + .5, self.reward_visits[i][j], ha='center', va='center')
+        plt.colorbar(plt.pcolor(self.reward_visits))
+        plt.savefig('reward_visits.png')
+
+    def draw_scores(self):
+        plt.figure()
+        plt.xlim([0, self.episodes])
+        plt.ylim([0, 1])
+        for i, item in enumerate(self.scores[1:]):
+            plt.plot(i, item, 'ro')
+        plt.xlabel('Step')
+        plt.ylabel('Score')
+        plt.grid(True)
+        plt.savefig('scores.png')
+
 
 def main():
     # set parameters
     episodes = 2000
-    steps = 32
+    steps = 5
 
     gamma = .99
     epsilon = np.linspace(.6, .1, episodes)

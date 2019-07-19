@@ -1,0 +1,3316 @@
+<sdf version="1.6">
+  <world name="default">
+    <light name="sun" type="directional">
+      <cast_shadows>1</cast_shadows>
+      <pose frame="">-11.8208 -19.3843 17.2198 0 -0 0</pose>
+      <diffuse>0.7 0.7 0.7 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>0.3698 0.4 -0.5</direction>
+    </light>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>0</shadows>
+    </scene>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic"/>
+    <physics name="default_physics" default="0" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name="box_0">
+      <pose frame="">-1.06423 -0.030024 0 0 -0 0</pose>
+      <static>1</static>
+      <link name="link">
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <laser_retro>7.15378e+22</laser_retro>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/GroundMaze</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>0</gravity>
+      </link>
+    </model>
+    <state world_name="default">
+      <sim_time>23 722000000</sim_time>
+      <real_time>0 0</real_time>
+      <wall_time>1563547238 485327811</wall_time>
+      <iterations>1</iterations>
+      <model name="box_0">
+        <pose frame="">8 8 0 0 -0 0</pose>
+        <scale>16 16 0.01</scale>
+        <link name="link">
+          <pose frame="">8 8 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="box_1">
+        <pose frame="">8 0.3 0.5 0 -0 0</pose>
+        <scale>12 1 1</scale>
+        <link name="link">
+          <pose frame="">8 0.3 0.5 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="box_2">
+        <pose frame="">8 15.7 0.5 0 -0 0</pose>
+        <scale>12 1 1</scale>
+        <link name="link">
+          <pose frame="">8 15.7 0.5 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="box_3">
+        <pose frame="">15.7 8 0.5 0 -0 0</pose>
+        <scale>1 12 1</scale>
+        <link name="link">
+          <pose frame="">15.7 8 0.5 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="box_4">
+        <pose frame="">0.3 8 0.5 0 -0 0</pose>
+        <scale>1 12 1</scale>
+        <link name="link">
+          <pose frame="">0.3 8 0.5 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="box_5">
+        <pose frame="">14.6 0.3 0.5 0 -0 0</pose>
+        <scale>1.2 1 1</scale>
+        <link name="link">
+          <pose frame="">14.6 0.3 0.5 0 -0 0</pose>
+          <velocity>0 0 -0.0504 0 -0 0</velocity>
+          <acceleration>0 0 -29.8 0 -0 0</acceleration>
+          <wrench>0 0 -29.8 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="box_5_0">
+        <pose frame="">14.6 15.7 0.5 0 -0 0</pose>
+        <scale>1.2 1 1</scale>
+        <link name="link">
+          <pose frame="">14.6 15.7 0.5 0 -0 0</pose>
+          <velocity>-0.000124 0 -0.049769 -0 -0.000177 1e-06</velocity>
+          <acceleration>-0.124123 -0.000101 -29.1687 -0.000449 -0.177207 0.00119</acceleration>
+          <wrench>-0.124123 -0.000101 -29.1687 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="box_5_0_0">
+        <pose frame="">1.4 0.3 0.5 0 -0 0</pose>
+        <scale>1.2 1 1</scale>
+        <link name="link">
+          <pose frame="">1.4 0.3 0.5 0 -0 0</pose>
+          <velocity>0 0 -0.1304 0 -0 0</velocity>
+          <acceleration>0 0 -51.6 0 -0 0</acceleration>
+          <wrench>0 0 -51.6 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="box_5_0_0_0">
+        <pose frame="">1.4 15.7 0.5 0 -0 0</pose>
+        <scale>1.2 1 1</scale>
+        <link name="link">
+          <pose frame="">1.4 15.7 0.5 0 -0 0</pose>
+          <velocity>0 0 -0.0504 0 -0 0</velocity>
+          <acceleration>0 0 -29.8 0 -0 0</acceleration>
+          <wrench>0 0 -29.8 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="box_5_0_0_0_0">
+        <pose frame="">0.3 15.1 0.5 -1e-06 -3e-06 -0</pose>
+        <scale>1 2.2 1</scale>
+        <link name="link">
+          <pose frame="">0.3 15.1 0.5 -1e-06 -3e-06 -0</pose>
+          <velocity>-5e-06 1e-06 0.010003 -3e-06 -1e-05 0</velocity>
+          <acceleration>-0.005014 0.001373 10.0034 -0.002774 -0.010128 -2e-06</acceleration>
+          <wrench>-0.005014 0.001373 10.0034 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="box_5_0_0_1">
+        <pose frame="">0.3 0.9 0.5 0 -0 0</pose>
+        <scale>1 2.2 1</scale>
+        <link name="link">
+          <pose frame="">0.3 0.9 0.5 0 -0 0</pose>
+          <velocity>0 0 -0.0098 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -9.8 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="box_5_0_1">
+        <pose frame="">15.7 15.1 0.5 0 -0 0</pose>
+        <scale>1 2.2 1</scale>
+        <link name="link">
+          <pose frame="">15.7 15.1 0.5 0 -0 0</pose>
+          <velocity>-0.000103 7e-06 0.009987 -1.5e-05 -0.000209 1e-06</velocity>
+          <acceleration>-0.10336 0.007289 9.98686 -0.015094 -0.208837 0.000684</acceleration>
+          <wrench>-0.10336 0.007289 9.98686 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="box_5_1">
+        <pose frame="">15.7 0.9 0.5 0 -0 0</pose>
+        <scale>1 2.2 1</scale>
+        <link name="link">
+          <pose frame="">15.7 0.9 0.5 0 -0 0</pose>
+          <velocity>0 0 -0.0098 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -9.8 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_11">
+        <pose frame="">14 14 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">14 14 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_13">
+        <pose frame="">4 12 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">4 12 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_14">
+        <pose frame="">6 10 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">6 10 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_15">
+        <pose frame="">4 10 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">4 10 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_16">
+        <pose frame="">4 8 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">4 8 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_17">
+        <pose frame="">4 6 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">4 6 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_18">
+        <pose frame="">6 6 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">6 6 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_19">
+        <pose frame="">6 8 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">6 8 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_20">
+        <pose frame="">8 6 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">8 6 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_21">
+        <pose frame="">8 8 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">8 8 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_22">
+        <pose frame="">8 10 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">8 10 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_23">
+        <pose frame="">10 8 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">10 8 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_24">
+        <pose frame="">10 6 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">10 6 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_25">
+        <pose frame="">10 10 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">10 10 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_26">
+        <pose frame="">12 10 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">12 10 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_27">
+        <pose frame="">12 8 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">12 8 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_28">
+        <pose frame="">12 6 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">12 6 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_29">
+        <pose frame="">6 12 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">6 12 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_30">
+        <pose frame="">8 12 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">8 12 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_31">
+        <pose frame="">10 12 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">10 12 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_32">
+        <pose frame="">12 12 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">12 12 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_33">
+        <pose frame="">14 12 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">14 12 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_35">
+        <pose frame="">14 8 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">14 8 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_37">
+        <pose frame="">14 10 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">14 10 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_39">
+        <pose frame="">14 6 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">14 6 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_42">
+        <pose frame="">10 4 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">10 4 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_43">
+        <pose frame="">8 4 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">8 4 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_44">
+        <pose frame="">6 4 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">6 4 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_45">
+        <pose frame="">12 4 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">12 4 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_46">
+        <pose frame="">14 4 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">14 4 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_48">
+        <pose frame="">4 4 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">4 4 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_49">
+        <pose frame="">2 2 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">2 2 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_5">
+        <pose frame="">4 14 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">4 14 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_50">
+        <pose frame="">2 4 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">2 4 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_51">
+        <pose frame="">4 2 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">4 2 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_52">
+        <pose frame="">2 6 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">2 6 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_53">
+        <pose frame="">2 8 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">2 8 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_54">
+        <pose frame="">2 10 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">2 10 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_55">
+        <pose frame="">2 12 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">2 12 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_56">
+        <pose frame="">2 14 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">2 14 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_58">
+        <pose frame="">6 2 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">6 2 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_59">
+        <pose frame="">8 2 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">8 2 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_6">
+        <pose frame="">6 14 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">6 14 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_60">
+        <pose frame="">10 2 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">10 2 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_61">
+        <pose frame="">12 2 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">12 2 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_62">
+        <pose frame="">14 2 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">14 2 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_7">
+        <pose frame="">8 14 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">8 14 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_8">
+        <pose frame="">10 14 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">10 14 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name="wood_checkerboard_9">
+        <pose frame="">12 14 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name="woodcheckerboard::body">
+          <pose frame="">12 14 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name="sun">
+        <pose frame="">-11.8208 -19.3843 17.2198 0 -0 0</pose>
+      </light>
+    </state>
+    <model name="box_1">
+      <pose frame="">15.5 -15.5 0.495 0 -0 0</pose>
+      <static>1</static>
+      <link name="link">
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/WallMaze</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="box_2">
+      <pose frame="">-0.116651 15.5 0.495 0 -0 0</pose>
+      <static>1</static>
+      <link name="link">
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/WallMaze</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="box_3">
+      <pose frame="">14.5914 1.51737 0.505 0 -0 0</pose>
+      <static>1</static>
+      <link name="link">
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/WallMaze</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="box_4">
+      <pose frame="">-12.9695 0.50458 0.505 0 -0 0</pose>
+      <static>1</static>
+      <link name="link">
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/WallMaze</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="box_5">
+      <pose frame="">6.15339 -5.97811 0.505 0 -0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <laser_retro>2.46629e-43</laser_retro>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="box_5_0">
+      <pose frame="">6.58318 6.8948 0.05 0 -0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <laser_retro>3.96067e-14</laser_retro>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="box_5_0_0">
+      <pose frame="">-6.43158 -6.35696 0.05 0 -0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <laser_retro>6.71475e-22</laser_retro>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="box_5_0_0_0">
+      <pose frame="">-6.32943 6.47646 0.05 0 -0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <laser_retro>1.10638e+30</laser_retro>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_5">
+      <pose frame="">-6.06022 4.2069 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_6">
+      <pose frame="">-4.01937 4 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_7">
+      <pose frame="">-1.85327 4.21172 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_8">
+      <pose frame="">-0.081054 4.08632 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_9">
+      <pose frame="">1.94173 3.88932 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_11">
+      <pose frame="">3.94173 4.00971 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_13">
+      <pose frame="">-5.54105 2.2069 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_14">
+      <pose frame="">-3.60763 0.214817 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_15">
+      <pose frame="">-5.97071 0.206899 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_16">
+      <pose frame="">-5.8633 -1.7931 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_17">
+      <pose frame="">-5.98861 -3.7931 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_18">
+      <pose frame="">-3.98861 -3.8488 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_19">
+      <pose frame="">-3.80455 -1.78518 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_20">
+      <pose frame="">-1.98861 -3.93826 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_21">
+      <pose frame="">-1.80455 -1.84382 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_22">
+      <pose frame="">-1.60763 0.035802 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_23">
+      <pose frame="">-0.045252 -1.9642 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_24">
+      <pose frame="">0.01139 -4.08142 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_25">
+      <pose frame="">0.39237 0.107405 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_26">
+      <pose frame="">2.39237 -0.107404 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_27">
+      <pose frame="">1.95475 -1.80797 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_28">
+      <pose frame="">2.01139 -4.04556 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_29">
+      <pose frame="">-3.54105 2.25558 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_30">
+      <pose frame="">-1.79957 2.21172 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_31">
+      <pose frame="">0.20043 1.77219 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_32">
+      <pose frame="">2.26393 1.88932 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_33">
+      <pose frame="">3.89358 2 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_35">
+      <pose frame="">4 0.070237 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_37">
+      <pose frame="">4 -1.8984 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_39">
+      <pose frame="">4 -3.85112 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_42">
+      <pose frame="">-0.88875 -5.93826 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_43">
+      <pose frame="">-2.01781 -6 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_44">
+      <pose frame="">-4.01781 -5.79992 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_45">
+      <pose frame="">2 -5.76424 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_46">
+      <pose frame="">3.8025 -6 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_48">
+      <pose frame="">-6 -5.67446 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_49">
+      <pose frame="">2.04338 2.0118 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_50">
+      <pose frame="">2 4.16754 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_51">
+      <pose frame="">3.88804 2 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_52">
+      <pose frame="">2 6.06932 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_53">
+      <pose frame="">2 8.02359 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_54">
+      <pose frame="">2 10.0265 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_55">
+      <pose frame="">2 12.2821 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_56">
+      <pose frame="">2 14.4017 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_58">
+      <pose frame="">6.15638 2 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_59">
+      <pose frame="">8.00366 2 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_60">
+      <pose frame="">10.0037 2.36527 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_61">
+      <pose frame="">11.8536 2 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="wood_checkerboard_62">
+      <pose frame="">13.8758 2 0.015 0 -0 0</pose>
+      <static>1</static>
+      <link name="woodcheckerboard::body">
+        <collision name="woodcheckerboard-collision">
+          <pose frame="">0 0 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="woodcheckerboard">
+          <cast_shadows>1</cast_shadows>
+          <geometry>
+            <mesh>
+              <uri>model://woodcheckerboard/meshes/woodcheckerboard.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="box_5_0_1">
+      <pose frame="">15.081 14.1903 0.5 0 -0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <laser_retro>1.7444e+28</laser_retro>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="box_5_1">
+      <pose frame="">14.7843 1.71354 0.525 0 -0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <laser_retro>1.07658e+21</laser_retro>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="box_5_0_0_1">
+      <pose frame="">1.30445 1.75231 0.525 -0 -0 -0</pose>
+      <link name="link">
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <laser_retro>4.03574e-43</laser_retro>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name="box_5_0_0_0_0">
+      <pose frame="">1.11594 14.204 0.5 0 -0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <laser_retro>7.25097e-10</laser_retro>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    </world>
+</sdf>

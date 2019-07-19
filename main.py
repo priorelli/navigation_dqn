@@ -36,6 +36,7 @@ class Model:
 
         dist = sum(abs(self.reward_pos[0] - state))
 
+        # action = self.qlearning.choose_action(state, self.epsilon[i])
         while not done and step < self.steps:
             # choose action using policy
             action = self.qlearning.choose_action(state, self.epsilon[i])
@@ -60,13 +61,14 @@ class Model:
                 int(state_new[0]), int(state_new[1])], '\n')
 
             # update plot
-            self.draw_plot(i, state_new, dir)
+            self.draw_map(i, state_new, dir)
 
             # get reward
             reward = 0
             if red:
+                print('red')
                 for r_idx, j in enumerate(self.reward_pos):
-                    if np.linalg.norm(state_new - j) < 2 in self.reward_pos:
+                    if np.linalg.norm(state_new - j) < 0.6:
                         reward = 5
                         done = 1
                         self.reward_visits[int(j[0]), int(j[1])] += 1
@@ -75,42 +77,56 @@ class Model:
             elif np.linalg.norm(state - state_new) < .1:
                 reward = -1
 
+            # action_new = self.qlearning.choose_action(state, self.epsilon[i])
+
+            # update table
+            td = self.qlearning.update_table_qlearning(state, state_new, action, reward)
+            # td = self.qlearning.update_table_sarsa(state, state_new, action, action_new, reward)
+            self.tderrors.append(td)
+            print('TD-error:', td)
+            self.draw_tderror(i, step)
+
             # set next state
             state = state_new
+            # action = action_new
             step += 1
             time.sleep(.5)
 
-            # update table
-            td = self.qlearning.update_table(state, state_new, action, reward)
-            print('TD-error:', td)
-
         score = dist / step if done else 0
-        self.scores.append(self.scores[-1] * .9 + score * .1)
+        self.scores.append(self.scores[-1] * .8 + score * .2)
         print('Path length:', step)
 
     def run_training(self, vc):
 
         for i in range(self.episodes):
-            # create figure
-            self.f = plt.figure(figsize=(5, 10))
-            self.ax1 = self.f.add_subplot(211)
-            self.ax2 = self.f.add_subplot(212)
+            # create figures
+            self.minimap = plt.figure(figsize=(5, 10))
+            self.minimap1 = self.minimap.add_subplot(211)
+            self.minimap2 = self.minimap.add_subplot(212)
+
+            self.scoresmap = plt.figure(figsize=(5, 10))
+            self.scoresmap1 = self.scoresmap.add_subplot(211)
+            self.scoresmap2 = self.scoresmap.add_subplot(212)
+
+            self.tderrormap = plt.figure()
+            self.tderrormap1 = self.tderrormap.add_subplot(111)
 
             # set initial parameters
-            init_position = np.array([7.5, 7.5])
+            init_position = np.array([11.5, 11.5])
             init_direction = 0
             self.grid_area = generate_grids(16)
+            self.tderrors = []
 
-            # draw plot
+            # draw minimap
             rospy.set_param('i', i)
-            self.draw_plot(i, init_position, init_direction)
+            self.draw_map(i, init_position, init_direction)
 
             # launch experiment
             try:
                 self.sim = vc.launch_experiment('template_husky_0_0_0')
             except:
                 time.sleep(1)
-            time.sleep(10)
+            time.sleep(5)
 
             # start the experiment
             self.sim.start()
@@ -120,68 +136,74 @@ class Model:
 
             # stop experiment
             self.sim.stop()
-            time.sleep(10)
+            time.sleep(5)
 
-            # draw reward visits
-            self.draw_visits()
+            # draw scores map
+            self.draw_scores(i)
 
-            # draw scores
-            self.draw_scores()
-
-    def draw_plot(self, i, pos, dir):
+    def draw_map(self, i, pos, dir):
         # plot robot position
         markers = ['v', '>', '^', '<']
-        self.ax1.plot(pos[1], pos[0], marker=markers[dir], markersize=3, color='red')
-        self.ax1.set_xlim([0, 16])
-        self.ax1.set_ylim([0, 16])
-        self.ax1.invert_yaxis()
+        self.minimap1.plot(pos[1], pos[0], marker=markers[dir], markersize=3, color='red')
+        self.minimap1.set_xlim([0, 16])
+        self.minimap1.set_ylim([0, 16])
+        self.minimap1.invert_yaxis()
         ticks = np.arange(0, 16, 1)
-        self.ax1.set_xticks(ticks)
-        self.ax1.set_yticks(ticks)
-        self.ax1.grid(True)
+        self.minimap1.set_xticks(ticks)
+        self.minimap1.set_yticks(ticks)
+        self.minimap1.grid(True)
 
         # plot grid cells
-        self.ax2.imshow(self.grid_area, cmap='BuGn', interpolation='nearest')
-        self.ax2.invert_yaxis()
-        self.ax2.set_xticks([])
-        self.ax2.set_yticks([])
-        self.ax2.grid(False)
+        self.minimap2.imshow(self.grid_area, cmap='BuGn', interpolation='nearest')
+        self.minimap2.invert_yaxis()
+        self.minimap2.set_xticks([])
+        self.minimap2.set_yticks([])
+        self.minimap2.grid(False)
 
         # save plot
-        plt.savefig('plot_%d.png' % i)
+        self.minimap.savefig('plots/plot_%d.png' % i)
 
-    def draw_visits(self):
-        plt.figure()
-        plt.gca().invert_yaxis()
+    def draw_scores(self, i):
+        # plot reward visits
+        self.scoresmap1.invert_yaxis()
         ticks = np.arange(0, 16, 1)
-        plt.xticks(ticks)
-        plt.yticks(ticks)
-        for i in range(self.n_env):
-            for j in range(self.n_env):
-                plt.text(j + .5, i + .5, self.reward_visits[i][j], ha='center', va='center')
-        plt.colorbar(plt.pcolor(self.reward_visits))
-        plt.savefig('reward_visits.png')
+        self.scoresmap1.set_xticks(ticks)
+        self.scoresmap1.set_yticks(ticks)
+        self.scoresmap1.imshow(self.reward_visits, interpolation='none')
 
-    def draw_scores(self):
-        plt.figure()
-        plt.xlim([0, self.episodes])
-        plt.ylim([0, 1])
-        for i, item in enumerate(self.scores[1:]):
-            plt.plot(i, item, 'ro')
-        plt.xlabel('Step')
-        plt.ylabel('Score')
-        plt.grid(True)
-        plt.savefig('scores.png')
+        # plot scores
+        self.scoresmap2.set_xlim([0, self.episodes])
+        self.scoresmap2.set_ylim([0, 1])
+        self.scoresmap2.plot([i, i + 1], self.scores[i: i + 2], linestyle='-', color='red')
+        self.scoresmap2.set_xlabel('Episode')
+        self.scoresmap2.set_ylabel('Score')
+        self.scoresmap2.grid(True)
+
+        # save plot
+        self.scoresmap.savefig('plots/scores_%d.png' % i)
+
+    def draw_tderror(self, i, step):
+        try:
+            self.tderrormap1.plot([step - 1, step], self.tderrors[step - 1: step + 1],
+                                  linestyle='-', color='red')
+        except:
+            self.tderrormap1.plot(step, self.tderrors[step], linestyle='-', color='red')
+        self.tderrormap1.set_xlabel('Step')
+        self.tderrormap1.set_ylim([0, 100])
+        self.tderrormap1.set_ylabel('TD-error')
+        self.tderrormap1.grid(True)
+
+        self.tderrormap.savefig('plots/tderror_%d.png' % i)
 
 
 def main():
     # set parameters
     episodes = 2000
-    steps = 5
+    steps = 32
 
-    gamma = .99
+    gamma = .98
     epsilon = np.linspace(.6, .1, episodes)
-    alpha = 1e-5
+    alpha = .1
 
     n_env = 16
     n_actions = 3

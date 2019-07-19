@@ -28,7 +28,12 @@ class Qlearning:
 
         return a
 
-    def update_table(self, s, s_n, a, r):
+    def update_table_qlearning(self, s, s_n, a, r):
         td_error = r + self.gamma * np.max(self.Q[self.get_idx(s_n), :]) - self.Q[self.get_idx(s), a]
+        self.Q[self.get_idx(s), a] += self.alpha * td_error
+        return td_error
+
+    def update_table_sarsa(self, s, s_n, a, a_n, r):
+        td_error = r + self.gamma * self.Q[self.get_idx(s_n), a_n] - self.Q[self.get_idx(s), a]
         self.Q[self.get_idx(s), a] += self.alpha * td_error
         return td_error

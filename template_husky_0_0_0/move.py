@@ -31,9 +31,9 @@ def move(t, step_index, position, camera, initial_pose, direction):
         rospy.set_param('red', False)
 
     # set velocity values
-    ang = 2.
+    ang = 1.5
     lin = 1.
-    epsilon = .02
+    epsilon = .017
 
     def move_forward():
         if step_index.value in [0, 1]:

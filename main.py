@@ -5,6 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from qlearning import Qlearning
 from grid_activations import generate_grids
+from dqn.husky_dqn import Agent
+import pickle
+
 from hbp_nrp_virtual_coach.virtual_coach import VirtualCoach
 
 
@@ -26,6 +29,10 @@ class Model:
                                    n_env=self.n_env, n_actions=self.n_actions)
         self.reward_visits = np.zeros((self.n_env, self.n_env), dtype=np.int32)
         self.scores = [0]
+
+        self.scoresmap = plt.figure(figsize=(5, 10))
+        self.scoresmap1 = self.scoresmap.add_subplot(211)
+        self.scoresmap2 = self.scoresmap.add_subplot(212)
 
         # first is top left and then clockwise direction
         self.reward_pos = np.array([[1.5, 1.5], [1.5, 14.5], [14.5, 1.5], [14.5, 14.5]])
@@ -66,9 +73,8 @@ class Model:
             # get reward
             reward = 0
             if red:
-                print('red')
                 for r_idx, j in enumerate(self.reward_pos):
-                    if np.linalg.norm(state_new - j) < 0.6:
+                    if np.linalg.norm(state_new - j) <= 0.5:
                         reward = 5
                         done = 1
                         self.reward_visits[int(j[0]), int(j[1])] += 1
@@ -93,7 +99,7 @@ class Model:
             time.sleep(.5)
 
         score = dist / step if done else 0
-        self.scores.append(self.scores[-1] * .8 + score * .2)
+        self.scores.append(self.scores[-1] * .9 + score * .1)
         print('Path length:', step)
 
     def run_training(self, vc):
@@ -104,15 +110,11 @@ class Model:
             self.minimap1 = self.minimap.add_subplot(211)
             self.minimap2 = self.minimap.add_subplot(212)
 
-            self.scoresmap = plt.figure(figsize=(5, 10))
-            self.scoresmap1 = self.scoresmap.add_subplot(211)
-            self.scoresmap2 = self.scoresmap.add_subplot(212)
-
             self.tderrormap = plt.figure()
             self.tderrormap1 = self.tderrormap.add_subplot(111)
 
             # set initial parameters
-            init_position = np.array([11.5, 11.5])
+            init_position = np.array([7.5, 7.5])
             init_direction = 0
             self.grid_area = generate_grids(16)
             self.tderrors = []
@@ -126,7 +128,7 @@ class Model:
                 self.sim = vc.launch_experiment('template_husky_0_0_0')
             except:
                 time.sleep(1)
-            time.sleep(5)
+            time.sleep(10)
 
             # start the experiment
             self.sim.start()
@@ -136,10 +138,15 @@ class Model:
 
             # stop experiment
             self.sim.stop()
-            time.sleep(5)
+            time.sleep(10)
 
             # draw scores map
             self.draw_scores(i)
+
+            pickle.dump(self.reward_visits, open('reward_visits.pkl', 'wb'))
+            pickle.dump(self.tderrors, open('td_errors.pkl', 'wb'))
+            pickle.dump(self.scores, open('scores.pkl', 'wb'))
+            pickle.dump(self.qlearning.Q, open('Q.pkl', 'wb'))
 
     def draw_map(self, i, pos, dir):
         # plot robot position
@@ -175,7 +182,6 @@ class Model:
         self.scoresmap2.set_xlim([0, self.episodes])
         self.scoresmap2.set_ylim([0, 1])
         self.scoresmap2.plot([i, i + 1], self.scores[i: i + 2], linestyle='-', color='red')
-        self.scoresmap2.set_xlabel('Episode')
         self.scoresmap2.set_ylabel('Score')
         self.scoresmap2.grid(True)
 
@@ -183,10 +189,10 @@ class Model:
         self.scoresmap.savefig('plots/scores_%d.png' % i)
 
     def draw_tderror(self, i, step):
-        try:
+        if step > 0:
             self.tderrormap1.plot([step - 1, step], self.tderrors[step - 1: step + 1],
                                   linestyle='-', color='red')
-        except:
+        else:
             self.tderrormap1.plot(step, self.tderrors[step], linestyle='-', color='red')
         self.tderrormap1.set_xlabel('Step')
         self.tderrormap1.set_ylim([0, 100])
@@ -198,8 +204,8 @@ class Model:
 
 def main():
     # set parameters
-    episodes = 2000
-    steps = 32
+    episodes = 100
+    steps = 26
 
     gamma = .98
     epsilon = np.linspace(.6, .1, episodes)

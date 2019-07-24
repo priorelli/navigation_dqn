@@ -14,8 +14,6 @@ def move(t, step_index, position, camera, initial_pose, direction):
     import rospy
     import numpy as np
     import tf
-    from cv_bridge import CvBridge
-    import cv2
 
     if initial_pose.value is None:
         initial_pose.value = position.value.pose[position.value.name.index('husky')]
@@ -31,10 +29,6 @@ def move(t, step_index, position, camera, initial_pose, direction):
         rospy.set_param('red', True)
     else:
         rospy.set_param('red', False)
-
-    # get camera data
-    cv_image = CvBridge().imgmsg_to_cv2(camera.value, 'rgb8')
-    cv_image = cv2.resize(cv_image, (32, 32))
 
     # set velocity values
     ang = 1.5
@@ -94,8 +88,6 @@ def move(t, step_index, position, camera, initial_pose, direction):
     # reset state and send info to main function
     if step_index.value == 2:
         rospy.set_param('direction', direction.value)
-        rospy.set_param('position', [current_pose.position.x, current_pose.position.y])
-
         rospy.set_param('action_done', 1)
         step_index.value = 0
 

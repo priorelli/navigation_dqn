@@ -1,0 +1,12 @@
+<ns1:bibi 
+  xmlns:ns1="http://schemas.humanbrainproject.eu/SP10/2014/BIBI" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ns1:brainModel>
+    <ns1:file>idle_brain.py</ns1:file>
+    <ns1:populations from="0" population="neurons" to="2" xsi:type="ns1:Range" />
+    <ns1:populations from="0" population="record" to="2" xsi:type="ns1:Range" />
+  </ns1:brainModel>
+  <ns1:bodyModel robotId="husky">husky_model/model.sdf</ns1:bodyModel>
+  <ns1:transferFunction src="move.py" xsi:type="ns1:PythonTransferFunction" />
+  <ns1:transferFunction src="minimap.py" xsi:type="ns1:PythonTransferFunction" />
+</ns1:bibi>

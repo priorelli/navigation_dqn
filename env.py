@@ -16,6 +16,8 @@ class Grid:
         self.reward_visits = {(1, 1): 0, (1, self.dim - 2): 0,
                       (self.dim - 2, 1): 0, (self.dim - 2, self.dim - 2): 0}
 
+        self.dist = 0
+
     # reset environment
     def reset(self, f=True):
         # reset grid
@@ -36,14 +38,14 @@ class Grid:
         for goal in self.goals:
             self.grid[goal] = 3
 
-        dist = np.sum(np.abs(
+        self.dist = np.sum(np.abs(
             np.array(self.init) - np.array(self.goals[0])))
 
         if f:
             return np.concatenate([np.array(self.init) / float(self.dim),
-                                  [self.dir / 3.0]])[np.newaxis, :], dist
+                                  [self.dir / 3.0]])[np.newaxis, :]
         else:
-            return self.init, self.dir, dist
+            return self.init, self.dir
 
     # make one step
     def step(self, action, f=True):
@@ -69,7 +71,7 @@ class Grid:
 
         # compute reward
         reward = 10. if self.init in self.goals else 0.
-        reward -= .5 if bounce else .2
+        reward -= 2. if bounce else .0
 
         done = 1 if self.init in self.goals else 0
 

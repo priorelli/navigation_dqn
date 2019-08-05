@@ -14,7 +14,7 @@ class Grid:
         self.goals = []
 
         self.reward_visits = {(1, 1): 0, (1, self.dim - 2): 0,
-                      (self.dim - 2, 1): 0, (self.dim - 2, self.dim - 2): 0}
+                              (self.dim - 2, 1): 0, (self.dim - 2, self.dim - 2): 0}
 
         self.dist = 0
 
@@ -70,8 +70,8 @@ class Grid:
             bounce = 1
 
         # compute reward
-        reward = 10. if self.init in self.goals else 0.
-        reward -= 2. if bounce else .0
+        reward = 10.0 if self.init in self.goals else 0.0
+        reward -= 2.0 if bounce else 0.0
 
         done = 1 if self.init in self.goals else 0
 

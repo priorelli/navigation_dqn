@@ -1,8 +1,5 @@
 import tensorflow as tf
-import numpy as np
-import seaborn as sns
 import utils as env
-import scipy.io as sio
 
 inits = tf.initializers.GlorotUniform()
 

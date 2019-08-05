@@ -6,12 +6,12 @@ import pickle
 def integrate(x):
 	a = [x[0]]
 	for i in range(1, len(x)):
-		a.append(a[i - 1] * .99 + x[i] * .01)
+		a.append(a[i - 1] * 0.99 + x[i] * 0.01)
 	return a
 
 
 def running_average(x, window_size, mode='valid'):
-    return np.convolve(x, np.ones(window_size) / window_size, mode=mode)
+	return np.convolve(x, np.ones(window_size) / window_size, mode=mode)
 
 
 episodes = 20000

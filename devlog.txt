@@ -3,7 +3,8 @@ The images from the Husky camera have not the correct colors. The reward positio
 SOLUTION: Opencv uses GBR format instead of RGB, so the images from the camera have to be saved in this format.
 
 24/07/19
-If you accidentally delete some files in the local github folder, check this: https://stackoverflow.com/questions/11727083/how-to-recover-file-after-git-rm-abc-c
+If you accidentally delete some files in the local github folder, 
+check this: https://stackoverflow.com/questions/11727083/how-to-recover-file-after-git-rm-abc-c
 
 30/07/19
 Perform running average on every metric except the loss function
@@ -14,4 +15,15 @@ Design experiment with a double DQN + experience replay
 Design experiment with a random agent
 
 31/07/19
-The score is computed as the Manhattan distance between the initial position of the agent and the goal position, over the number of steps done by the agent.
+The first score is computed as the Manhattan distance between the initial position 
+of the agent and the goal position, over the number of steps done by the agent.
+
+01/08/19
+The second score represents the number of times that the robot reached a reward location.
+The third one represents the sum of the rewards for each episode.
+The fouth one represents the number of steps done by the robot to reach the reward location.
+
+They use laser sensors for input; they use a continuous environment; they use four actions; 
+the agent receives a negative reward based on the number of steps; the network has an input 
+layer (512), three hidden layers (256, 128, 64) and an output layer (32); they also use the
+goal position as input but because the goal changes at every episode.

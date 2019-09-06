@@ -90,12 +90,12 @@ def main():
     vc = VirtualCoach(environment='local', storage_username='nrpuser',
                       storage_password='password')
 
-    # subscribe to topics published by ros
-    nhl.perform_subscribers()
-
     # tau = 0  # update the second network after max_tau steps
     for episode in range(param.episodes):
         sim = vc.launch_experiment('template_husky_0')
+
+        # subscribe to topics published by ros
+        nhl.perform_subscribers()
 
         # start the experiment
         sim.start()

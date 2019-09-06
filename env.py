@@ -42,8 +42,13 @@ class Grid:
             np.array(self.init) - np.array(self.goals[0])))
 
         if f:
+            # normalized = np.concatenate([self.init, [self.dir]])
+            # min_, max_ = np.min(normalized), np.max(normalized)
+            # normalized = (normalized - min_) / float(max_ - min_)
             return np.concatenate([np.array(self.init) / float(self.dim),
                                   [self.dir / 3.0]])[np.newaxis, :]
+            # return normalized[np.newaxis, :]
+
         else:
             return self.init, self.dir
 
@@ -71,7 +76,7 @@ class Grid:
 
         # compute reward
         reward = 10.0 if self.init in self.goals else 0.0
-        reward -= 2.0 if bounce else 0.0
+        reward -= 1.0 if bounce else 0.0
 
         done = 1 if self.init in self.goals else 0
 
@@ -79,8 +84,12 @@ class Grid:
             self.reward_visits[self.init] += 1
 
         if f:
+            # normalized = np.concatenate([self.init, [self.dir]])
+            # min_, max_ = np.min(normalized), np.max(normalized)
+            # normalized = (normalized - min_) / float(max_ - min_)
             return np.concatenate([np.array(self.init) / float(self.dim),
                                    [self.dir / 3.0]])[np.newaxis, :], reward, done
+            # return normalized[np.newaxis, :], reward, done
         else:
             return self.init, self.dir, reward, done
 

@@ -51,9 +51,9 @@ def detect_red():
 
 
 def perform_subscribers():
-    rospy.Subscriber('/husky/camera', Image, get_data,
+    rospy.Subscriber('/husky/husky/camera', Image, get_data,
                      callback_args=[raw_data, 'camera'])
-    rospy.Subscriber('/husky/laser/scan', LaserScan, get_data,
+    rospy.Subscriber('/husky/husky/laser/scan', LaserScan, get_data,
                      callback_args=[raw_data, 'laser'])
     rospy.Subscriber('/gazebo/model_states', ModelStates, get_data,
                      callback_args=[raw_data, 'position'])

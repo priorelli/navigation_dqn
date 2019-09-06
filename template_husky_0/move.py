@@ -11,7 +11,7 @@ import geometry_msgs.msg
 @nrp.MapVariable('initial_pose', global_key='initial_pose', initial_value=None)
 @nrp.MapVariable('step_index', global_key='step_index', initial_value=0)
 @nrp.MapVariable('direction', global_key='direction', initial_value=0)
-@nrp.Neuron2Robot(Topic('/husky/cmd_vel', geometry_msgs.msg.Twist))
+@nrp.Neuron2Robot(Topic('/husky/husky/cmd_vel', geometry_msgs.msg.Twist))
 def move(t, step_index, position, initial_pose, dir_topic, direction):
     import math
     import rospy
@@ -19,11 +19,11 @@ def move(t, step_index, position, initial_pose, dir_topic, direction):
     import tf
 
     if initial_pose.value is None:
-        initial_pose.value = position.value.pose[position.value.name.index('robot')]
+        initial_pose.value = position.value.pose[position.value.name.index('husky')]
 
     linear = geometry_msgs.msg.Vector3(0, 0, 0)
     angular = geometry_msgs.msg.Vector3(0, 0, 0)
-    current_pose = position.value.pose[position.value.name.index('robot')]
+    current_pose = position.value.pose[position.value.name.index('husky')]
     directions = [0, math.pi / 2, math.pi, math.pi * 3 / 2]
 
     # set velocity values

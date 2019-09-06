@@ -90,11 +90,8 @@ def main():
 
         # start the experiment
         sim.start()
-        nhl.sync_params()
+        nhl.sync_params(episode)
         time.sleep(5)
-
-        # time-stamp for the video streaming
-        rospy.set_param('i', episode)
 
         # inner-loop for running an episode
         run_episode(episode, q_primary)

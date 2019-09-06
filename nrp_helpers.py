@@ -61,10 +61,10 @@ def perform_subscribers():
                      callback_args=[raw_data, 'direction'])
 
 
-def sync_params():
+def sync_params(episode):
     rospy.set_param('action_done', 0)
     rospy.set_param('action', -1)
-    rospy.set_param('i', 0)
+    rospy.set_param('i', episode)
 
     while any(i is None for i in raw_data.values()):
         time.sleep(0.1)

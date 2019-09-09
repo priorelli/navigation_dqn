@@ -44,8 +44,8 @@ def run_episode(episode, tau, q_primary, q_target):
         next_pos, next_state = dhl.get_observation(nhl.raw_data)
         print('Position:', int(next_pos[0]), int(next_pos[1]))
         print('Direction:', nhl.raw_data['direction'].data)
-        print('Episode: ', episode)
-        print('Step:', step)
+        print('Episode: ', episode + 1)
+        print('Step:', step + 1)
         print('-' * 10)
 
         # check whether the agent received the reward

@@ -45,8 +45,7 @@ def run_episode(episode, q_primary):
         print('Position:', int(next_pos[0]), int(next_pos[1]))
         print('Direction:', nhl.raw_data['direction'].data)
         print('Episode: ', episode)
-        print('Remaining episodes:', param.episodes - episode)
-        print('Remaining steps:', param.steps - step)
+        print('Step:', step)
         print('-' * 10)
 
         # check whether the agent received the reward
@@ -100,7 +99,7 @@ def main():
         sim.stop()
         time.sleep(5)
 
-        if episode % 200 == 0:
+        if episode % 100 == 0:
             # save metrics for postprocessing
             pickle.dump(param.loss_of_episodes, open(res_folder + 'loss_of_episodes_single_%d.pkl'
                         % episode, 'wb'))

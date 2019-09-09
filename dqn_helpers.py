@@ -42,7 +42,7 @@ def process_laser(laser):
 
 
 def process_position(position):
-    position = position.pose[position.name.index('robot')]
+    position = position.pose[position.name.index('husky')]
     position = np.asarray([position.position.x, position.position.y])
 
     return position

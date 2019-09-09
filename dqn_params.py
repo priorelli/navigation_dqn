@@ -6,7 +6,7 @@ import numpy as np
 n_env = 16  # size of the grid
 
 episodes = 1000
-steps = 32
+steps = 36
 
 max_tau = 20
 max_batch = 10
@@ -21,7 +21,7 @@ n_neurons = 128         # number of units in hidden layer
 
 # the first reward is top left and then clockwise direction
 reward_poses = np.array([[1.5, 1.5], [1.5, 14.5], [14.5, 1.5], [14.5, 14.5]])
-reward_target_found, reward_obstacle, reward_free = 10.0, -5.0, 0.0
+reward_target_found, reward_obstacle, reward_free = 10.0, -2.0, 0.0
 
 loss_of_episodes = [[] for _ in range(episodes)]
 reward_of_episodes = []

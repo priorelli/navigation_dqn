@@ -127,7 +127,7 @@ def main():
         time.sleep(5)
 
         # save metrics and network for postprocessing
-        if episode % 100 == 0:
+        if (episode + 1) % 100 == 0:
             dhl.save_objects(q_primary, episode, 'double_replay')
 
     print("Target score: ", sum(param.target_scores) / float(param.episodes))

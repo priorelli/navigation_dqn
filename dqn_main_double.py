@@ -117,7 +117,7 @@ def main():
         sim.stop()
         time.sleep(5)
 
-        if episode % 100 == 0:
+        if (episode + 1) % 100 == 0:
             # save metrics for postprocessing
             dhl.save_objects(q_primary, episode, 'double')
 

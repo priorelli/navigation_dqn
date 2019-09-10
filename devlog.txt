@@ -91,3 +91,9 @@ check if husky doesn't get stuck in front of an obstacle
 check if reward location is found
 (test each case separately)
 display plots with matplotlib and ggplot style
+
+[10/09/19]
+save plots for visualization
+display minimap on video streams
+clean up qlearning in simple environment
+delete dqn_main_results

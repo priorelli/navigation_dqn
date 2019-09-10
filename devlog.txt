@@ -1,12 +1,12 @@
-23/07/19
+[23/07/19]
 The images from the Husky camera have not the correct colors. The reward positions in red are displayed in blue.
 SOLUTION: Opencv uses GBR format instead of RGB, so the images from the camera have to be saved in this format.
 
-24/07/19
+[24/07/19]
 If you accidentally delete some files in the local github folder, 
 check this: https://stackoverflow.com/questions/11727083/how-to-recover-file-after-git-rm-abc-c
 
-30/07/19
+[30/07/19]
 Perform running average on every metric except the loss function
 Design experiment with a simple DQN
 Design experiment with a simple DQN + experience replay
@@ -14,11 +14,11 @@ Design experiment with a double DQN
 Design experiment with a double DQN + experience replay
 Design experiment with a random agent
 
-31/07/19
+[31/07/19]
 The first score is computed as the Manhattan distance between the initial position 
 of the agent and the goal position, over the number of steps done by the agent.
 
-01/08/19
+[01/08/19]
 The second score represents the number of times that the robot reached a reward location.
 The third one represents the sum of the rewards for each episode.
 The fouth one represents the number of steps done by the robot to reach the reward location.
@@ -27,3 +27,67 @@ They use laser sensors for input; they use a continuous environment; they use fo
 the agent receives a negative reward based on the number of steps; the network has an input 
 layer (512), three hidden layers (256, 128, 64) and an output layer (32); they also use the
 goal position as input but because the goal changes at every episode.
+
+[05/08/19]
+The second score (scores_done) represents the number of times that the robot reached a reward location.
+The third one (rewards represents the sum of the rewards for each episode.
+The fouth one (steps_variation) represents the number of steps done by the robot to reach the reward location.
+The fifth one (score for reward visits) represents the number of times that the robot reached a reward 
+location over the total number of episodes.
+The sixth one (score for steps) represents the sum of total rewards over the total number of steps.
+
+They use laser sensors for input; they use a continuous environment; they use four actions; 
+the agent receives a negative reward based on the number of steps; the network has an input 
+layer (512), three hidden layers (256, 128, 64) and an output layer (32); they also use the
+goal position as input but because the goal changes at every episode.
+
+If I want to use tensorflow on GPU, i have to use python3.
+
+I have to change the head directions from 1 to 4 because the input should not be 0 (the network 
+should not be fed with zero elements, in particular with low dimensional input)
+
+[06/08/19]
+How can i make laser readings visible?
+
+<sensor name='head_hokuyo_sensor' type='ray'>
+        <visualize>1</visualize>
+
+Check the model for hokuyo
+
+[07/08/19]
+The nrp dqn experiments.
+For each experiment I will show/save/diplay/log below metrics.
+* time for whole experiment execution
+* time for each episode
+* action index, q_prediction, max_q, loss value
+
++ The simple dqn with input of posx, posy, head_orient, cam, laser
+
+* ros call back functions can not accept an additional parameters.
+  def get_image(data)
+
+* if a topic is already published you do not need to create a
+transfer function.
+
+* cv2_image variable used for not losing the final process data 
+def get_image(data):
+    global camera
+    cv_image = CvBridge().imgmsg_to_cv2(data, 'bgr8')[:170, :]
+    cv_image = cv2.resize(cv_image, (32, 32))
+    cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY)
+    camera = cv_image.flatten().astype(np.float32)
+
+links:
+More information for virtual coach
+https://developer.humanbrainproject.eu/docs/projects/HBP%20Neurorobotics%20Platform/1.2/nrp/tutorials/virtual_coach/launching_exp.html
+
+[29/08/19]
+initialization of virtual coach should be done outside the loop
+i is set first to episode and then to 0
+
+[04/09/19]
+check if initial position is reset
+check if husky doesn't get stuck in front of an obstacle
+check if reward location is found
+(test each case separately)
+display plots with matplotlib and ggplot style

@@ -24,7 +24,7 @@ reward_poses = np.array([[1.5, 1.5], [1.5, 14.5], [14.5, 1.5], [14.5, 14.5]])
 reward_target_found, reward_obstacle, reward_free = 10.0, -2.0, 0.0
 
 # metrics
-res_folder = 'dqn_main_results'
+res_folder = 'results'
 
 loss_of_episodes = [[] for _ in range(episodes)]
 reward_of_episodes = []

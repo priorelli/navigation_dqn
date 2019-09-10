@@ -13,7 +13,7 @@ import dqn_params as param
 raw_data = {'camera': None, 'laser': None, 'position': None, 'direction': None}
 
 
-# for the below callbacks you do not need to put in to the nrp tran. funcs.
+# for the callbacks below you do not need to put in to the nrp tran. funcs.
 # get data from rostopic
 def get_data(data, args):
     args[0][args[1]] = data
@@ -50,6 +50,7 @@ def detect_red():
         return False
 
 
+# subscribe to ros topics
 def perform_subscribers():
     rospy.Subscriber('/husky/husky/camera', Image, get_data,
                      callback_args=[raw_data, 'camera'])
@@ -61,6 +62,7 @@ def perform_subscribers():
                      callback_args=[raw_data, 'direction'])
 
 
+# sync parameters between nrp and main
 def sync_params(episode):
     rospy.set_param('action_done', 0)
     rospy.set_param('action', -1)
@@ -76,7 +78,7 @@ def get_action_name(action_id):
 
 
 def get_reward(pos, next_pos):
-    if np.linalg.norm(pos - next_pos) < 0.1:  # it is safety factor
+    if np.linalg.norm(pos - next_pos) < 0.1:  # safety factor
         return param.reward_obstacle, 0, None
     elif detect_red():
         for r_idx, r_pos in enumerate(param.reward_poses):

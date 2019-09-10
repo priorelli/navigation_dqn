@@ -1,19 +1,18 @@
 from __future__ import print_function
 import numpy as np
-import dqn_helpers as dhl
-import nrp_helpers as nhl
 import time
 import rospy
-from hbp_nrp_virtual_coach.virtual_coach import VirtualCoach
+import dqn_helpers as dhl
+import nrp_helpers as nhl
 from agent import Agent
 import dqn_params as param
-import pickle
+from hbp_nrp_virtual_coach.virtual_coach import VirtualCoach
 
 
 def run_episode(episode, q_primary):
     step, episode_done, rewards = 0, 0, []
 
-    # state contains the observation received from the environment
+    # the state contains the observation received from the environment
     # constructed by the sensory input of the robot
     pos, state = dhl.get_observation(nhl.raw_data)
 
@@ -24,36 +23,32 @@ def run_episode(episode, q_primary):
         # choose action based on e-greedy policy
         if np.random.rand() < param.epsilon[episode]:
             action = np.random.randint(0, param.n_actions)
-            print('-----Random action-----')
+            print('Action (random):', nhl.get_action_name(action))
         else:
             action = int(np.argmax(prediction_q_actions))
-        print('Action:', nhl.get_action_name(action))
+            print('Action:', nhl.get_action_name(action))
 
-        # the action goes to the transfer function
-        rospy.set_param('action', action)
-
-        # execute action
+        # the action goes to the transfer function and is executed
         action_done = 0
+        rospy.set_param('action', action)
         rospy.set_param('action_done', action_done)
 
         # wait until action is done
         while action_done == 0:
             action_done = rospy.get_param('action_done')
 
-        # the robot will take an action, now it is in a next state
+        # the robot is now in a new state
         next_pos, next_state = dhl.get_observation(nhl.raw_data)
         print('Position:', int(next_pos[0]), int(next_pos[1]))
         print('Direction:', nhl.raw_data['direction'].data)
         print('Episode: ', episode + 1)
         print('Step:', step + 1)
-        print('-' * 10)
 
         # check whether the agent received the reward
         reward, episode_done, reward_ind = nhl.get_reward(pos, next_pos)
-        print('Reward:', reward)
         rewards.append(reward)
-        if episode_done:
-            print('Reward location found! Reward index:', reward_ind)
+        print('Reward:', reward)
+        print('-' * 10)
 
         # update weights
         loss = dhl.update_network_single(q_primary, state, next_state, reward)
@@ -65,14 +60,17 @@ def run_episode(episode, q_primary):
         pos = next_pos
         step += 1
 
+        if episode_done:
+            print('Reward location found! Reward index:', reward_ind)
+            print('-' * 10)
+
+    # store metrics
     param.reward_of_episodes.append(sum(rewards))
     param.step_of_episodes.append(step)
     param.target_scores.append(episode_done)
 
 
 def main():
-    res_folder = 'dqn_main_results/'
-
     # initialize agents
     q_primary = Agent(param.alpha, param.n_observations, param.n_actions, param.n_neurons)
 
@@ -82,7 +80,15 @@ def main():
                       storage_password='password')
 
     for episode in range(param.episodes):
-        sim = vc.launch_experiment('template_husky_0')
+        count = 0
+        while True:
+            try:
+                sim = vc.launch_experiment('template_husky_0')
+                break
+            except:
+                count += 1
+                print('Try:', count)
+                time.sleep(2)
 
         # subscribe to topics published by ros
         nhl.perform_subscribers()
@@ -99,26 +105,11 @@ def main():
         sim.stop()
         time.sleep(5)
 
+        # save metrics and network for postprocessing
         if episode % 100 == 0:
-            # save metrics for postprocessing
-            pickle.dump(param.loss_of_episodes, open(res_folder + 'loss_of_episodes_single_%d.pkl'
-                        % episode, 'wb'))
-            pickle.dump(param.reward_of_episodes, open(res_folder + 'reward_of_episodes_single_%d.pkl'
-                        % episode, 'wb'))
-            pickle.dump(param.step_of_episodes, open(res_folder + 'step_of_episodes_single_%d.pkl'
-                        % episode, 'wb'))
-            pickle.dump(param.target_scores, open(res_folder + 'target_scores_single_%d.pkl'
-                        % episode, 'wb'))
-            pickle.dump(param.reward_visits, open(res_folder + 'reward_visits_single_%d.pkl'
-                        % episode, 'wb'))
+            dhl.save_objects(q_primary, episode, 'single')
 
-            # save the network
-            pickle.dump(q_primary.weights, open(res_folder + 'weights_single_%d.pkl'
-                        % episode, 'wb'))
-            pickle.dump(q_primary.biases, open(res_folder + 'biases_single_%d.pkl'
-                        % episode, 'wb'))
-
-    print("Target score: ", sum(param.target_scores) / float(param.episodes))
+    print('Target score:', sum(param.target_scores) / float(param.episodes))
     print('Reward visits:', np.sum(param.reward_visits))
 
 

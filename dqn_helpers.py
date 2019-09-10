@@ -4,6 +4,7 @@ import numpy as np
 import dqn_params as param
 import tensorflow as tf
 from cv_bridge import CvBridge
+import pickle
 
 
 def tic():
@@ -126,3 +127,21 @@ def update_network_double_replay(q_primary, q_target, experience):
         q_primary.optimizer.apply_gradients(zip(gradients, trainable_vars))
 
     return loss.numpy()
+
+
+def save_objects(network, episode, type_):
+    pickle.dump(param.loss_of_episodes, open(param.res_folder + 'loss_of_episodes_%s_%d.pkl'
+                                             % (type_, episode), 'wb'))
+    pickle.dump(param.reward_of_episodes, open(param.res_folder + 'reward_of_episodes_%s_%d.pkl'
+                                               % (type_, episode), 'wb'))
+    pickle.dump(param.step_of_episodes, open(param.res_folder + 'step_of_episodes_%s_%d.pkl'
+                                             % (type_, episode), 'wb'))
+    pickle.dump(param.target_scores, open(param.res_folder + 'target_scores_%s_%d.pkl'
+                                          % (type_, episode), 'wb'))
+    pickle.dump(param.reward_visits, open(param.res_folder + 'reward_visits_%s_%d.pkl'
+                                          % (type_, episode), 'wb'))
+
+    pickle.dump(network.weights, open(param.res_folder + 'weights_%s_%d.pkl'
+                                      % (type_, episode), 'wb'))
+    pickle.dump(network.biases, open(param.res_folder + 'biases_%s_%d.pkl'
+                                     % (type_, episode), 'wb'))

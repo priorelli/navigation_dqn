@@ -9,15 +9,16 @@ def running_average(x, window_size, mode='valid'):
 
 res_folder = 'dqn_main_results/'
 
-t = '_single_0'
+t = 'single'
+episode = 300
 
-target_scores = pickle.load(open(res_folder + '%s.pkl' % ('target_scores' + t), 'rb'))
-reward_of_episodes = pickle.load(open(res_folder + '%s.pkl' % ('reward_of_episodes' + t), 'rb'))
-step_of_episodes = pickle.load(open(res_folder + '%s.pkl' % ('step_of_episodes' + t), 'rb'))
-loss_of_episodes = pickle.load(open(res_folder + '%s.pkl' % ('loss_of_episodes' + t), 'rb'))
-reward_visits = pickle.load(open(res_folder + '%s.pkl' % ('reward_visits' + t), 'rb'))
+target_scores = pickle.load(open(res_folder + 'target_scores_%s_%d.pkl' % (t, episode), 'rb'))
+reward_of_episodes = pickle.load(open(res_folder + 'reward_of_episodes_%s_%d.pkl' % (t, episode), 'rb'))
+step_of_episodes = pickle.load(open(res_folder + 'step_of_episodes_%s_%d.pkl' % (t, episode), 'rb'))
+loss_of_episodes = pickle.load(open(res_folder + 'loss_of_episodes_%s_%d.pkl' % (t, episode), 'rb'))
+reward_visits = pickle.load(open(res_folder + 'reward_visits_%s_%d.pkl' % (t, episode), 'rb'))
 
-w = len(target_scores) / 5
+w = episode / 5
 
 fig1 = sns.plt.figure(1)
 target_scores_plot = fig1.add_subplot(311)

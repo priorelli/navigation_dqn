@@ -26,7 +26,7 @@ def run_episode(episode, tau, q_primary, q_target):
             print('Action (random):', nhl.get_action_name(action))
         else:
             action = int(np.argmax(prediction_q_actions))
-           print('Action:', nhl.get_action_name(action))
+            print('Action:', nhl.get_action_name(action))
 
         # the action goes to the transfer function and is executed
         action_done = 0

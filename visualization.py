@@ -1,4 +1,5 @@
 import numpy as np
+import dqn_params as param
 import seaborn as sns
 import pickle
 
@@ -7,16 +8,14 @@ def running_average(x, window_size, mode='valid'):
     return np.convolve(x, np.ones(window_size) / window_size, mode=mode)
 
 
-res_folder = 'dqn_main_results/'
-
 t = 'single'
 episode = 300
 
-target_scores = pickle.load(open(res_folder + 'target_scores_%s_%d.pkl' % (t, episode), 'rb'))
-reward_of_episodes = pickle.load(open(res_folder + 'reward_of_episodes_%s_%d.pkl' % (t, episode), 'rb'))
-step_of_episodes = pickle.load(open(res_folder + 'step_of_episodes_%s_%d.pkl' % (t, episode), 'rb'))
-loss_of_episodes = pickle.load(open(res_folder + 'loss_of_episodes_%s_%d.pkl' % (t, episode), 'rb'))
-reward_visits = pickle.load(open(res_folder + 'reward_visits_%s_%d.pkl' % (t, episode), 'rb'))
+target_scores = pickle.load(open(param.res_folder + 'target_scores_%s_%d.pkl' % (t, episode), 'rb'))
+reward_of_episodes = pickle.load(open(param.res_folder + 'reward_of_episodes_%s_%d.pkl' % (t, episode), 'rb'))
+step_of_episodes = pickle.load(open(param.res_folder + 'step_of_episodes_%s_%d.pkl' % (t, episode), 'rb'))
+loss_of_episodes = pickle.load(open(param.res_folder + 'loss_of_episodes_%s_%d.pkl' % (t, episode), 'rb'))
+reward_visits = pickle.load(open(param.res_folder + 'reward_visits_%s_%d.pkl' % (t, episode), 'rb'))
 
 w = episode / 5
 

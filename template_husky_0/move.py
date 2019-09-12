@@ -2,11 +2,10 @@ import hbp_nrp_cle.tf_framework as nrp
 from hbp_nrp_cle.robotsim.RobotInterface import Topic
 import sensor_msgs.msg
 import std_msgs.msg
-from std_msgs.msg import Int32
 import geometry_msgs.msg
 
 
-@nrp.MapRobotPublisher('dir_topic', Topic('direction', Int32))
+@nrp.MapRobotPublisher('dir_topic', Topic('direction', std_msgs.msg.Int32))
 @nrp.MapRobotSubscriber('position', Topic('/gazebo/model_states', gazebo_msgs.msg.ModelStates))
 @nrp.MapVariable('initial_pose', global_key='initial_pose', initial_value=None)
 @nrp.MapVariable('step_index', global_key='step_index', initial_value=0)
@@ -27,9 +26,9 @@ def move(t, step_index, position, initial_pose, dir_topic, direction):
     directions = [0, math.pi / 2, math.pi, math.pi * 3 / 2]
 
     # set velocity values
-    ang = 1.2
+    ang = 1.
     lin = 1.
-    epsilon = .015
+    epsilon = .01
 
     def move_forward():
         if step_index.value in [0, 1]:

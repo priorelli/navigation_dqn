@@ -12,22 +12,22 @@ def main():
     render_start = 0
 
     # set model parameters
-    episodes = 6000
-    steps = 30
+    episodes = 1000
+    steps = 36
 
     gamma = 0.99
-    alpha = 0.0005
-    epsilon = np.linspace(0.5, 0.0, episodes)
+    alpha = 0.0001
+    epsilon = np.linspace(0.5, 0.05, episodes)
 
-    n_env = 9
+    n_env = 17
     n_actions = 3
 
     # create environment
     position = int((n_env - 1) / 2)
     env = Grid(n_env, (position, position), 0)
 
-    scores = []
-    losses = [[] for _ in range(episodes)]
+    scores_manhattan = []
+    scores_done = []
     rewards_variation = []
     steps_variation = []
 
@@ -55,8 +55,7 @@ def main():
             rewards.append(reward)
 
             # update weights
-            loss = qlearning.update_table_qlearning(state, state_new, action, dir_, dir_new, reward)
-            losses[episode].append(loss)
+            _ = qlearning.update_table_qlearning(state, state_new, action, dir_, dir_new, reward)
 
             # set next state
             state = state_new
@@ -64,24 +63,23 @@ def main():
             step += 1
 
         # print reward
-        scores.append(env.dist / float(step) if done else 0.0)
+        scores_manhattan.append(env.dist / float(step) if done else 0.0)
+        scores_done.append(done)
         rewards_variation.append(sum(rewards))
         steps_variation.append(step)
 
-        print('episode: %5d      reward: %6.2f'
-              '      score: %6.2f      step: %2d       %s'
-              % (episode + 1, sum(rewards), scores[-1], step,
-                 'Reward location is reached' if done else ''))
+        print('episode: %5d      reward: %6.2f      score: %6.2f      step: %2d      %s'
+              % (episode + 1, sum(rewards), scores_manhattan[-1], step,
+                 'Done' if done else ''))
 
     # save objects
-    pickle.dump(scores, open('results/scores_tabular.pkl', 'wb'))
-    pickle.dump(rewards_variation, open('results/rewards_variation_tabular.pkl', 'wb'))
-    pickle.dump(steps_variation, open('results/steps_variation_tabular.pkl', 'wb'))
-    pickle.dump(losses, open('results/losses_tabular.pkl', 'wb'))
+    pickle.dump(scores_manhattan, open('results/scores_manhattan.pkl', 'wb'))
+    pickle.dump(scores_done, open('results/scores_done.pkl', 'wb'))
+    pickle.dump(rewards_variation, open('results/rewards_variation.pkl', 'wb'))
+    pickle.dump(steps_variation, open('results/steps_variation.pkl', 'wb'))
 
     # print final score
     print('Time elapsed:', time.time() - start)
-    print('Final score:', sum(env.reward_visits.values()) / float(episodes))
     print('Reward visits:', env.reward_visits)
 
 

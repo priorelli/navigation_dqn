@@ -58,18 +58,14 @@ def perform_subscribers():
                      callback_args=[raw_data, 'laser'])
     rospy.Subscriber('/gazebo/model_states', ModelStates, get_data,
                      callback_args=[raw_data, 'position'])
-    rospy.Subscriber('direction', Int32, get_data,
+    rospy.Subscriber('direction_topic', Int32, get_data,
                      callback_args=[raw_data, 'direction'])
 
 
 # sync parameters between nrp and main
 def sync_params(episode):
-    rospy.set_param('action_done', 0)
     rospy.set_param('action', -1)
     rospy.set_param('i', episode)
-
-    while any(i is None for i in raw_data.values()):
-        time.sleep(0.1)
 
 
 def get_action_name(action_id):

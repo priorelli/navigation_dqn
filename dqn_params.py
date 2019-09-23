@@ -5,15 +5,15 @@ import numpy as np
 # model parameters
 n_env = 16  # size of the grid
 
-episodes = 1000
-steps = 36
+episodes = 1200
+steps = 35
 
 max_tau = 20
 max_batch = 10
 
 gamma = 0.9
-epsilon = np.linspace(0.5, 0.05, episodes)
-alpha = 0.0001   # learning rate
+epsilon = np.linspace(0.5, 0.0, episodes)
+alpha = 0.01   # learning rate
 
 n_observations = 1207  # size of input to the network
 n_actions = 3  # left, right and forward

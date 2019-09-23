@@ -104,7 +104,7 @@ def main():
 
         # start the experiment
         sim.start()
-        nhl.sync_params(episode)
+        nhl.sync_params(episode + 1)
         time.sleep(5)
 
         # inner-loop for running an episode
@@ -116,7 +116,7 @@ def main():
 
         if (episode + 1) % 100 == 0:
             # save metrics for postprocessing
-            dhl.save_objects(q_primary, episode, 'single_replay')
+            dhl.save_objects(q_primary, episode + 1, 'single_replay')
 
     print("Target score: ", sum(param.target_scores) / float(param.episodes))
     print('Reward visits:', np.sum(param.reward_visits))

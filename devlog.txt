@@ -97,3 +97,6 @@ save plots for visualization
 display minimap on video streams
 clean up qlearning in simple environment
 delete dqn_main_results
+
+[12/09/19]
+in order to speed up the simulations on the nrp, i have to open the environment template, set the real_time_update_rate to 0, and remove the real_time_factor parameter

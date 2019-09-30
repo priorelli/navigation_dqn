@@ -9,7 +9,7 @@ def running_average(x, window_size, mode='valid'):
 
 
 t = 'single'
-episode = 1000
+episode = 500
 
 target_scores = pickle.load(open(param.res_folder + 'target_scores_%s_%d.pkl' % (t, episode), 'rb'))
 reward_of_episodes = pickle.load(open(param.res_folder + 'reward_of_episodes_%s_%d.pkl' % (t, episode), 'rb'))

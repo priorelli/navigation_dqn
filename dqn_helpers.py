@@ -50,7 +50,7 @@ def process_position(position):
 
 
 def construct_input(position, direction, camera, laser):
-    return np.concatenate((position, [direction], camera, laser))
+    return np.concatenate((position / 15.0, [direction / 3.0], camera / 255.0, laser / 5.0))
 
 
 def normalize_input(input_):
@@ -68,7 +68,8 @@ def get_observation(raw_data):
 
     input_ = construct_input(position, direction, camera, laser)
 
-    return position, normalize_input(input_)
+    # return position, normalize_input(input_)
+    return position, input_[np.newaxis, :]
 
 
 def update_network_single(q_primary, state, next_state, reward):
@@ -141,7 +142,5 @@ def save_objects(network, episode, type_):
     pickle.dump(param.reward_visits, open(param.res_folder + 'reward_visits_%s_%d.pkl'
                                           % (type_, episode), 'wb'))
 
-    pickle.dump(network.weights, open(param.res_folder + 'weights_%s_%d.pkl'
-                                      % (type_, episode), 'wb'))
-    pickle.dump(network.biases, open(param.res_folder + 'biases_%s_%d.pkl'
-                                     % (type_, episode), 'wb'))
+    pickle.dump(network, open(param.res_folder + 'q_primary_%s_%d.pkl'
+                              % (type_, episode), 'wb'))

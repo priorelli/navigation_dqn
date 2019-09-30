@@ -38,8 +38,8 @@ def move(t, step_index, position, initial_pose, direction_topic, direction, t_ol
     def move_forward():
         # check if robot has moved by 1 meter
         if np.linalg.norm(np.array([current_pose.position.x, current_pose.position.y]) -
-                          np.array([initial_pose.value.position.x, initial_pose.value.position.y])) < 1. \
-                and 1.5 <= current_pose.position.x <= 14.5 and 1.5 <= current_pose.position.y <= 14.5:
+                          np.array([initial_pose.value.position.x, initial_pose.value.position.y])) < 1.0 \
+                and 1.4 <= current_pose.position.x <= 14.6 and 1.4 <= current_pose.position.y <= 14.6:
             linear.x = lin
         else:
             initial_pose.value = None

@@ -30,17 +30,19 @@ def run_episode(episode, q_primary):
             print('Action:', nhl.get_action_name(action))
 
         # the action goes to the transfer function and is executed
-        action_done = 0
         rospy.set_param('action', action)
-        rospy.set_param('action_done', action_done)
 
         # wait until action is done
-        while action_done == 0:
-            action_done = rospy.get_param('action_done')
+        while action != -1:
+            time.sleep(0.2)
+            try:
+                action = rospy.get_param('action')
+            except KeyError:
+                pass
 
         # the robot is now in a new state
         next_pos, next_state = dhl.get_observation(nhl.raw_data)
-        print('Position:', int(next_pos[0]), int(next_pos[1]))
+        print('Position: %.1f %.1f' % (next_pos[0], next_pos[1]))
         print('Direction:', nhl.raw_data['direction'].data)
         print('Episode: ', episode + 1)
         print('Step:', step + 1)
@@ -103,19 +105,19 @@ def main():
         nhl.perform_subscribers()
 
         # start the experiment
-        sim.start()
         nhl.sync_params(episode + 1)
-        time.sleep(5)
+        sim.start()
+        time.sleep(2)
 
         # inner-loop for running an episode
         run_episode(episode, q_primary)
 
         # stop experiment
         sim.stop()
-        time.sleep(5)
+        time.sleep(2)
 
+        # save metrics and network for postprocessing
         if (episode + 1) % 100 == 0:
-            # save metrics for postprocessing
             dhl.save_objects(q_primary, episode + 1, 'single_replay')
 
     print("Target score: ", sum(param.target_scores) / float(param.episodes))

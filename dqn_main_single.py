@@ -34,7 +34,10 @@ def run_episode(episode, q_primary):
         # wait until action is done
         while action != -1:
             time.sleep(0.2)
-            action = rospy.get_param('action')
+            try:
+                action = rospy.get_param('action')
+            except KeyError:
+                pass
 
         # the robot is now in a new state
         next_pos, next_state = dhl.get_observation(nhl.raw_data)
@@ -95,14 +98,14 @@ def main():
         # start the experiment
         nhl.sync_params(episode + 1)
         sim.start()
-        time.sleep(2)
+        time.sleep(5)
 
         # inner-loop for running an episode
         run_episode(episode, q_primary)
 
         # stop experiment
         sim.stop()
-        time.sleep(2)
+        time.sleep(5)
 
         # save metrics and network for postprocessing
         if (episode + 1) % 100 == 0:

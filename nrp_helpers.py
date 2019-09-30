@@ -78,7 +78,7 @@ def get_reward(pos, next_pos):
         return param.reward_obstacle, 0, None
     elif detect_red():
         for r_idx, r_pos in enumerate(param.reward_poses):
-            if np.linalg.norm(next_pos - r_pos) <= 0.5:
+            if np.linalg.norm(next_pos - r_pos) <= 0.6:
                 param.reward_visits[int(r_pos[0]), int(r_pos[1])] += 1
                 return param.reward_target_found, 1, r_idx
     return param.reward_free, 0, None

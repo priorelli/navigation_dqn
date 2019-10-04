@@ -53,13 +53,6 @@ def construct_input(position, direction, camera, laser):
     return np.concatenate((position / 15.0, [direction / 3.0], camera / 255.0, laser / 5.0))
 
 
-def normalize_input(input_):
-    min_input, max_input = np.min(input_), np.max(input_)
-    normalized_input = (input_ - min_input) / (max_input - min_input)
-
-    return normalized_input[np.newaxis, :]
-
-
 def get_observation(raw_data):
     position = process_position(raw_data['position'])
     direction = float(raw_data['direction'].data)
@@ -68,7 +61,6 @@ def get_observation(raw_data):
 
     input_ = construct_input(position, direction, camera, laser)
 
-    # return position, normalize_input(input_)
     return position, input_[np.newaxis, :]
 
 

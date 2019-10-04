@@ -1,16 +1,17 @@
 import numpy as np
 import rospy
-import time
 import cv2
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 from std_msgs.msg import Int32
+from std_msgs.msg import Bool
 from sensor_msgs.msg import LaserScan
 from gazebo_msgs.msg import ModelStates
 import dqn_params as param
 
 
-raw_data = {'camera': None, 'laser': None, 'position': None, 'direction': None}
+raw_data = {'camera': None, 'laser': None, 'position': None,
+            'direction': None, 'action_done': None}
 
 
 # for the callbacks below you do not need to put in to the nrp tran. funcs.
@@ -60,12 +61,8 @@ def perform_subscribers():
                      callback_args=[raw_data, 'position'])
     rospy.Subscriber('direction_topic', Int32, get_data,
                      callback_args=[raw_data, 'direction'])
-
-
-# sync parameters between nrp and main
-def sync_params(episode):
-    rospy.set_param('action', -1)
-    rospy.set_param('i', episode)
+    rospy.Subscriber('action_done_topic', Bool, get_data,
+                     callback_args=[raw_data, 'action_done'])
 
 
 def get_action_name(action_id):
@@ -78,7 +75,7 @@ def get_reward(pos, next_pos):
         return param.reward_obstacle, 0, None
     elif detect_red():
         for r_idx, r_pos in enumerate(param.reward_poses):
-            if np.linalg.norm(next_pos - r_pos) <= 0.6:
+            if np.linalg.norm(next_pos - r_pos) <= 0.75:
                 param.reward_visits[int(r_pos[0]), int(r_pos[1])] += 1
                 return param.reward_target_found, 1, r_idx
     return param.reward_free, 0, None

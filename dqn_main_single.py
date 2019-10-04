@@ -6,7 +6,11 @@ import dqn_helpers as dhl
 import nrp_helpers as nhl
 from agent import Agent
 import dqn_params as param
+from std_msgs.msg import Int32
 from hbp_nrp_virtual_coach.virtual_coach import VirtualCoach
+
+
+action_topic = rospy.Publisher('action_topic', Int32, queue_size=1)
 
 
 def run_episode(episode, q_primary):
@@ -29,15 +33,12 @@ def run_episode(episode, q_primary):
             print('Action:', nhl.get_action_name(action))
 
         # the action goes to the transfer function and is executed
-        rospy.set_param('action', action)
+        action_topic.publish(Int32(action))
 
         # wait until action is done
-        while action != -1:
-            time.sleep(0.2)
-            try:
-                action = rospy.get_param('action')
-            except KeyError:
-                pass
+        while not nhl.raw_data['action_done'].data:
+            time.sleep(0.1)
+        action_topic.publish(Int32(-1))
 
         # the robot is now in a new state
         next_pos, next_state = dhl.get_observation(nhl.raw_data)
@@ -96,16 +97,15 @@ def main():
         nhl.perform_subscribers()
 
         # start the experiment
-        nhl.sync_params(episode + 1)
         sim.start()
-        time.sleep(5)
+        time.sleep(2)
 
         # inner-loop for running an episode
         run_episode(episode, q_primary)
 
         # stop experiment
         sim.stop()
-        time.sleep(5)
+        time.sleep(2)
 
         # save metrics and network for postprocessing
         if (episode + 1) % 100 == 0:

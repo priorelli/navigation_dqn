@@ -5,8 +5,8 @@ import numpy as np
 # model parameters
 n_env = 16  # size of the grid
 
-episodes = 400
-steps = 36
+episodes = 1000
+steps = 28
 
 max_tau = 12
 max_batch = 10

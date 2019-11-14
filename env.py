@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 
 # navigation task
 class Grid:
-    def __init__(self, dim, init_pos, init_dir):
+    def __init__(self, dim):
         self.dim = dim
-        self.init_pos = init_pos
-        self.init_dir = init_dir
+        self.init_pos = (int((dim - 1) / 2), int((dim - 1) / 2))
+        self.init_dir = 0
 
         self.pos = (0, 0)
         self.dir_ = 0
@@ -22,7 +22,7 @@ class Grid:
         self.dist = np.sum(np.abs(np.array(self.init_pos) - np.array(self.goals[0])))
 
     # reset environment
-    def reset(self, f=True):
+    def reset(self):
         # reset grid
         self.grid = [[1 for _ in range(self.dim)] for _ in range(2)]
         for _ in range(self.dim - 2):
@@ -37,14 +37,13 @@ class Grid:
         for goal in self.goals:
             self.grid[goal] = 3
 
-        if f:
-            return np.concatenate([np.array(self.pos) / float(self.dim),
-                                  [self.dir_ / 3.0]])[np.newaxis, :]
-        else:
-            return self.pos, self.dir_
+        # return np.concatenate([np.array(self.pos), np.array(self.goals).flatten()]) / float(self.dim)
+        return np.concatenate([np.array(self.pos) / float(self.dim),
+                               # np.array(self.goals).flatten() / float(self.dim),
+                               np.array([self.dir_]) / 3.0])
 
     # make one step
-    def step(self, action, f=True):
+    def step(self, action):
         bounce = 0
 
         x, y = self.pos
@@ -55,6 +54,10 @@ class Grid:
         inc = (0, 1) if self.dir_ == 0 else (
             1, 0) if self.dir_ == 1 else \
             (0, -1) if self.dir_ == 2 else (-1, 0)
+
+        # inc = (0, 1) if action == 0 else (
+        #     1, 0) if action == 1 else \
+        #     (0, -1) if action == 2 else (-1, 0)
 
         if self.grid[x + inc[0], y + inc[1]] != 1:
             self.grid[x, y] = 0
@@ -67,18 +70,18 @@ class Grid:
 
         # compute reward
         reward = 10.0 if self.pos in self.goals else 0.0
-        reward -= 2.0 if bounce else 0.0
+        reward -= 1.0 if bounce else 0.0
 
-        done = 1 if self.pos in self.goals else 0
-
-        if done:
+        if self.pos in self.goals:
+            done = 1
             self.reward_visits[self.pos] += 1
-
-        if f:
-            return np.concatenate([np.array(self.pos) / float(self.dim),
-                                   [self.dir_ / 3.0]])[np.newaxis, :], reward, done
         else:
-            return self.pos, self.dir_, reward, done
+            done = 0
+
+        # return np.concatenate([np.array(self.pos), np.array(self.goals).flatten()]) / float(self.dim), reward, done
+        return np.concatenate([np.array(self.pos) / float(self.dim),
+                               # np.array(self.goals).flatten() / float(self.dim),
+                               np.array([self.dir_]) / 3.0]), reward, done
 
     # render world
     def render(self):

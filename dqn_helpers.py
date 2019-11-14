@@ -1,33 +1,15 @@
-import time
 import cv2
 import numpy as np
 import dqn_params as param
-import tensorflow as tf
+import tf
 from cv_bridge import CvBridge
 import pickle
-
-
-def tic():
-    """ Log starting time to run specific code block."""
-
-    global _start_time
-    _start_time = time.time()
-
-
-def toc():
-    """ Print logged time in hour : min : sec format. """
-
-    t_sec = round(time.time() - _start_time)
-    (t_min, t_sec) = divmod(t_sec, 60)
-    (t_hour, t_min) = divmod(t_min, 60)
-
-    return '%f hours: %f mins: %f secs' % (t_hour, t_min, t_sec)
 
 
 def process_camera(camera):
     # crop the ROI for removing husky front part
     camera = CvBridge().imgmsg_to_cv2(camera, 'bgr8')[:170, :]
-    camera = cv2.resize(camera, (32, 32))
+    camera = cv2.resize(camera, (16, 16))
     camera = cv2.cvtColor(camera, cv2.COLOR_BGR2GRAY)
     camera = camera.flatten().astype(np.float32)
 
@@ -37,102 +19,50 @@ def process_camera(camera):
 def process_laser(laser):
     laser = np.asarray(laser.ranges)
     laser[laser == np.inf] = 0.0
-    laser = laser[np.arange(0, len(laser), 2)]
+    laser = laser[np.arange(0, len(laser), 4)]
 
     return laser
 
 
-def process_position(position):
-    position = position.pose[position.name.index('husky')]
-    position = np.asarray([position.position.x, position.position.y])
+def process_direction(pose):
+    pose = pose.pose[pose.name.index('husky')]
+
+    orientation = [pose.orientation.x, pose.orientation.y,
+                   pose.orientation.z, pose.orientation.w]
+    _, _, yaw = tf.transformations.euler_from_quaternion(orientation)
+
+    return yaw if yaw >= 0 else 2 * np.pi + yaw
+
+
+def process_position(pose):
+    pose = pose.pose[pose.name.index('husky')]
+    position = np.asarray([pose.position.x, pose.position.y])
 
     return position
 
 
-def construct_input(position, direction, camera, laser):
-    return np.concatenate((position / 15.0, [direction / 3.0], camera / 255.0, laser / 5.0))
-
-
 def get_observation(raw_data):
-    position = process_position(raw_data['position'])
-    direction = float(raw_data['direction'].data)
+    position = process_position(raw_data['pose'])
+    direction = process_direction(raw_data['pose'])
     camera = process_camera(raw_data['camera'])
     laser = process_laser(raw_data['laser'])
 
-    input_ = construct_input(position, direction, camera, laser)
+    input_ = np.concatenate((position / param.n_env, [direction / (2 * np.pi)],
+                             camera / 255.0, laser / 5.0))
+    # input_ = np.concatenate((position / param.n_env, [direction / (2 * np.pi)]))
 
     return position, input_[np.newaxis, :]
 
 
-def update_network_single(q_primary, state, next_state, reward):
-    with tf.GradientTape() as g:
-        prediction_q = q_primary.feedforward(state)
-        target_q = q_primary.feedforward(next_state)
-        target = tf.cast(reward + param.gamma * np.max(target_q), tf.float32)
-        loss = q_primary.get_loss(target, prediction_q)
+def save_objects(agent, memory, e):
+    str_ = 'double' if param.double else 'single'
+    str_ += '_replay' if param.replay else '_noreplay'
 
-        trainable_vars = list(q_primary.weights.values()) + list(q_primary.biases.values())
-        gradients = g.gradient(loss, trainable_vars)
-        q_primary.optimizer.apply_gradients(zip(gradients, trainable_vars))
+    pickle.dump(param.losses_variation, open(param.res_folder + 'losses_variation_%s_%d.pkl' % (str_, e), 'wb'))
+    pickle.dump(param.rewards_variation, open(param.res_folder + 'rewards_variation_%s_%d.pkl' % (str_, e), 'wb'))
+    pickle.dump(param.steps_variation, open(param.res_folder + 'steps_variation_%s_%d.pkl' % (str_, e), 'wb'))
+    pickle.dump(param.target_scores, open(param.res_folder + 'target_scores_%s_%d.pkl' % (str_, e), 'wb'))
+    pickle.dump(param.reward_visits, open(param.res_folder + 'reward_visits_%s_%d.pkl' % (str_, e), 'wb'))
 
-    return loss.numpy()
-
-
-def update_network_double(q_primary, q_target, state, next_state, reward):
-    with tf.GradientTape() as g:
-        prediction_q = q_primary.feedforward(state)
-        target_q = q_target.feedforward(next_state)
-        target = tf.cast(reward + param.gamma * np.max(target_q), tf.float32)
-        loss = q_primary.get_loss(target, prediction_q)
-
-        trainable_vars = list(q_primary.weights.values()) + list(q_primary.biases.values())
-        gradients = g.gradient(loss, trainable_vars)
-        q_primary.optimizer.apply_gradients(zip(gradients, trainable_vars))
-
-    return loss.numpy()
-
-
-def update_network_single_replay(q_primary, experience):
-    with tf.GradientTape() as g:
-        prediction_q = tf.convert_to_tensor([q_primary.feedforward(i[0])[0] for i in experience])
-        target_q = tf.convert_to_tensor([q_primary.feedforward(i[1])[0] for i in experience])
-        target = tf.cast(np.asarray([i[2] for i in experience])[np.newaxis, :].T +
-                         param.gamma * np.max(target_q, axis=1)[np.newaxis, :].T, tf.float32)
-        loss = q_primary.get_loss(target, prediction_q)
-
-        trainable_vars = list(q_primary.weights.values()) + list(q_primary.biases.values())
-        gradients = g.gradient(loss, trainable_vars)
-        q_primary.optimizer.apply_gradients(zip(gradients, trainable_vars))
-
-    return loss.numpy()
-
-
-def update_network_double_replay(q_primary, q_target, experience):
-    with tf.GradientTape() as g:
-        prediction_q = tf.convert_to_tensor([q_primary.feedforward(i[0])[0] for i in experience])
-        target_q = tf.convert_to_tensor([q_target.feedforward(i[1])[0] for i in experience])
-        target = tf.cast(np.asarray([i[2] for i in experience])[np.newaxis, :].T +
-                         param.gamma * np.max(target_q, axis=1)[np.newaxis, :].T, tf.float32)
-        loss = q_primary.get_loss(target, prediction_q)
-
-        trainable_vars = list(q_primary.weights.values()) + list(q_primary.biases.values())
-        gradients = g.gradient(loss, trainable_vars)
-        q_primary.optimizer.apply_gradients(zip(gradients, trainable_vars))
-
-    return loss.numpy()
-
-
-def save_objects(network, episode, type_):
-    pickle.dump(param.loss_of_episodes, open(param.res_folder + 'loss_of_episodes_%s_%d.pkl'
-                                             % (type_, episode), 'wb'))
-    pickle.dump(param.reward_of_episodes, open(param.res_folder + 'reward_of_episodes_%s_%d.pkl'
-                                               % (type_, episode), 'wb'))
-    pickle.dump(param.step_of_episodes, open(param.res_folder + 'step_of_episodes_%s_%d.pkl'
-                                             % (type_, episode), 'wb'))
-    pickle.dump(param.target_scores, open(param.res_folder + 'target_scores_%s_%d.pkl'
-                                          % (type_, episode), 'wb'))
-    pickle.dump(param.reward_visits, open(param.res_folder + 'reward_visits_%s_%d.pkl'
-                                          % (type_, episode), 'wb'))
-
-    pickle.dump(network, open(param.res_folder + 'q_primary_%s_%d.pkl'
-                              % (type_, episode), 'wb'))
+    pickle.dump(agent, open(param.res_folder + 'agent_%s_%d.pkl' % (str_, e), 'wb'))
+    pickle.dump(memory, open(param.res_folder + 'memory_%s_%d.pkl' % (str_, e), 'wb'))

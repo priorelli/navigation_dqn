@@ -11,12 +11,12 @@
   <configuration type="user-interaction-settings" src="ExDTemplateHusky.uis" />
   <maturity>production</maturity>
   <environmentModel src="empty_world.sdf">
-    <robotPose robotId="husky" x="7.5" y="7.5" z="0.5" roll="0.0" pitch="-0.0" yaw="0.0" />
+    <robotPose robotId="husky" x="8.0" y="8.0" z="0.5" roll="0.0" pitch="-0.0" yaw="0.0" />
   </environmentModel>
   <bibiConf src="bibi_configuration.bibi" />
   <cameraPose>
-    <cameraPosition x="7.5" y="7.5" z="10" />
-    <cameraLookAt x="7.5" y="7.5" z="0" />
+    <cameraPosition x="8.0" y="8.0" z="10" />
+    <cameraLookAt x="8.0" y="8.0" z="0" />
   </cameraPose>
   <cloneDate>2019-09-06T12:46:47</cloneDate>
 </ExD>

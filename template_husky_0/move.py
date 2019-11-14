@@ -2,47 +2,47 @@ import hbp_nrp_cle.tf_framework as nrp
 from hbp_nrp_cle.robotsim.RobotInterface import Topic
 import std_msgs.msg
 import geometry_msgs.msg
+import sensor_msgs.msg
+import gazebo_msgs.msg
 
 
 @nrp.MapRobotSubscriber('action_topic', Topic('action_topic', std_msgs.msg.Int32))
 @nrp.MapRobotPublisher('action_done_topic', Topic('action_done_topic', std_msgs.msg.Bool))
-@nrp.MapRobotPublisher('direction_topic', Topic('direction_topic', std_msgs.msg.Int32))
 @nrp.MapRobotSubscriber('position', Topic('/gazebo/model_states', gazebo_msgs.msg.ModelStates))
+@nrp.MapRobotSubscriber('laser', Topic('/husky/husky/laser/scan', sensor_msgs.msg.LaserScan))
 @nrp.MapVariable('initial_pose', global_key='initial_pose', initial_value=None)
 @nrp.MapVariable('step_index', global_key='step_index', initial_value=0)
-@nrp.MapVariable('direction', global_key='direction', initial_value=0)
 @nrp.Neuron2Robot(Topic('/husky/husky/cmd_vel', geometry_msgs.msg.Twist))
-def move(t, step_index, position, initial_pose, direction_topic, direction,
-         action_topic, action_done_topic):
+def move(t, step_index, position, laser, initial_pose, action_topic, action_done_topic):
     import math
     import numpy as np
     import tf
 
+    if position.value is None:
+        return
+
     linear = geometry_msgs.msg.Vector3(0, 0, 0)
     angular = geometry_msgs.msg.Vector3(0, 0, 0)
-
-    direction_topic.send_message(std_msgs.msg.Int32(direction.value))
-
-    if action_topic.value is None or action_topic.value.data < 0:
-        action_done_topic.send_message(std_msgs.msg.Bool(False))
-        return geometry_msgs.msg.Twist(linear=linear, angular=angular)
 
     if initial_pose.value is None:
         initial_pose.value = position.value.pose[position.value.name.index('husky')]
 
     current_pose = position.value.pose[position.value.name.index('husky')]
-    directions = [0, math.pi / 2, math.pi, math.pi * 3 / 2]
+
+    if action_topic.value is None or action_topic.value.data < 0:
+        action_done_topic.send_message(std_msgs.msg.Bool(False))
+        return geometry_msgs.msg.Twist(linear=linear, angular=angular)
 
     # set velocity values
-    ang = 1.0
+    ang = 1.2
     lin = 1.0
-    epsilon = .012
+    epsilon = .015
 
     def move_forward():
         # check if robot has moved by 1 meter
         if np.linalg.norm(np.array([current_pose.position.x, current_pose.position.y]) -
                           np.array([initial_pose.value.position.x, initial_pose.value.position.y])) < 1.0 \
-                and 1.5 <= current_pose.position.x <= 13.5 and 1.5 <= current_pose.position.y <= 13.5:
+                and min(np.asarray(laser.value.ranges)[140:220]) > 1.0:
             linear.x = lin
         else:
             initial_pose.value = None
@@ -58,14 +58,16 @@ def move(t, step_index, position, initial_pose, direction_topic, direction,
         _, _, yaw = tf.transformations.euler_from_quaternion(orientation)
         yaw = yaw if yaw >= 0 else 2 * math.pi + yaw
 
-        # compute final direction
-        final_dir = (direction.value + d) % 4
+        orientation_old = [initial_pose.value.orientation.x, initial_pose.value.orientation.y,
+                           initial_pose.value.orientation.z, initial_pose.value.orientation.w]
+        _, _, yaw_old = tf.transformations.euler_from_quaternion(orientation_old)
+        yaw_new = yaw_old + d * (math.pi / 2)
+        yaw_new = yaw_new if yaw_new >= 0 else 2 * math.pi + yaw_new
 
         # check if robot has rotated by 90 degrees
-        if not directions[final_dir] - epsilon < yaw < directions[final_dir] + epsilon:
+        if not yaw_new - epsilon < yaw < yaw_new + epsilon:
             angular.z = ang * d
         else:
-            direction.value = final_dir
             initial_pose.value = None
             step_index.value = 1
 
@@ -84,4 +86,3 @@ def move(t, step_index, position, initial_pose, direction_topic, direction,
             move_forward()
 
     return geometry_msgs.msg.Twist(linear=linear, angular=angular)
-

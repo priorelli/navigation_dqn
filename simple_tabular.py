@@ -13,7 +13,7 @@ def main():
 
     # set model parameters
     episodes = 1000
-    steps = 36
+    steps = 30
 
     gamma = 0.99
     alpha = 0.0001
@@ -23,8 +23,7 @@ def main():
     n_actions = 3
 
     # create environment
-    position = int((n_env - 1) / 2)
-    env = Grid(n_env, (position, position), 0)
+    env = Grid(n_env)
 
     scores_manhattan = []
     scores_done = []

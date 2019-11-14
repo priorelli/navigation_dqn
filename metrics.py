@@ -3,13 +3,6 @@ import seaborn as sns
 import pickle
 
 
-def integrate(x):
-	a = [x[0]]
-	for i in range(1, len(x)):
-		a.append(a[i - 1] * 0.99 + x[i] * 0.01)
-	return a
-
-
 def running_average(x, window_size, mode='valid'):
 	return np.convolve(x, np.ones(window_size) / window_size, mode=mode)
 
@@ -19,7 +12,7 @@ scores_done = pickle.load(open('results/scores_done.pkl', 'rb'))
 rewards_variation = pickle.load(open('results/rewards_variation.pkl', 'rb'))
 steps_variation = pickle.load(open('results/steps_variation.pkl', 'rb'))
 
-w = len(scores_manhattan) / 5
+w = int(len(scores_manhattan) / 5)
 
 
 fig = sns.plt.figure(1)
